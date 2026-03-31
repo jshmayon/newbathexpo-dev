@@ -1,1 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  /* Accent */
+  --accent:         rgb(11, 19, 140);
+  --accent-light:   rgb(37, 48, 184);
+  --accent-dark:    rgb(7, 13, 98);
+  --accent-muted:   rgba(11, 19, 140, 0.12);
+
+  /* Neutrals */
+  --color-bg:       #f8fafc;
+  --color-surface:  #ffffff;
+  --color-border:   #e2e8f0;
+  --color-text:     #0f172a;
+  --color-muted:    #64748b;
+  --color-subtle:   #94a3b8;
+  --color-dark:     #0f172a;
+
+  /* Layout */
+  --max-width: 1390px;
+
+  /* Font sizes */
+  --text-sm:   0.8rem;
+  --text-base: 1rem;
+  --text-md:   1.25rem;
+  --text-lg:   1.75rem;
+  --text-xl:   clamp(2rem, 5vw, 3.5rem);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-size: var(--text-base);
+  font-family: 'Nunito Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Noto Serif', serif;
+}

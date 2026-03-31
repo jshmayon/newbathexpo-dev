@@ -1,0 +1,10 @@
+<header class="navbar" [class.scrolled]="scrolled">
+  <a routerLink="/" class="logo">
+    <img src="assets/logo-text.png" alt="NewBath Expo" class="logo-img" />
+  </a>
+  <nav class="nav-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
+    <a routerLink="/bookings" routerLinkActive="active">Bookings</a>
+    <a routerLink="/bookings" class="cta-btn">Get a Free Quote</a>
+  </nav>
+</header>
