@@ -1,0 +1,27 @@
+<section class="portfolio">
+  <div class="portfolio-inner">
+    <div class="section-header">
+      <p class="eyebrow">Our Work</p>
+      <h2>Past Creations</h2>
+      <p class="subtitle">All our projects are completed with dedication and attention to detail. Each space is designed uniquely to stand the test of time.</p>
+    </div>
+
+    <div class="portfolio-grid">
+      @for (item of items; track item.title) {
+        <div class="portfolio-card">
+          <div class="card-image">
+            <img [src]="item.image" [alt]="item.title" loading="lazy" />
+            <div class="card-overlay">
+              <span class="style-tag">{{ item.style }}</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+            <a routerLink="/bookings" class="card-cta">Get a Similar Look</a>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

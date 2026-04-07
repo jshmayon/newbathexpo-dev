@@ -1,0 +1,28 @@
+<section class="process">
+  <div class="process-inner">
+    <div class="section-header">
+      <p class="eyebrow">How It Works</p>
+      <h2>Simple. Fast.<br />Stress-Free.</h2>
+      <p class="subtitle">From first call to final reveal — here's what to expect when you work with us.</p>
+    </div>
+
+    <div class="steps">
+      @for (step of steps; track step.number; let last = $last) {
+        <div class="step-wrapper">
+          <div class="step-card">
+            <div class="step-number">{{ step.number }}</div>
+            <p class="step-description">{{ step.description }}</p>
+          </div>
+          @if (!last) {
+            <div class="step-connector">
+              <div class="connector-line"></div>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</section>

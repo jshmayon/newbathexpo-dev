@@ -1,15 +1,38 @@
 <section class="hero">
-  <video #heroVideo autoplay [muted]="true" loop playsinline class="hero-video">
-    <source src="assets/file.mp4" type="video/mp4" />
-  </video>
+  <div class="hero-slides">
+    @for (slide of slides; track slide; let i = $index) {
+      <div class="hero-slide" [class.active]="i === activeSlide" [style.background-image]="'url(' + slide + ')'"></div>
+    }
+  </div>
   <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <p class="hero-eyebrow">Trusted Bathroom Experts</p>
-    <h1>We Make Bathroom<br />Remodeling Easy<br /><span>And Affordable</span></h1>
-    <p class="hero-sub">Transform your bathroom with our expert team — on time, on budget, every time.</p>
-    <div class="hero-actions">
-      <a routerLink="/bookings" class="btn-primary">Book a Consultation</a>
-      <a href="#" class="btn-ghost">See Our Work</a>
+
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Trusted Bathroom Experts</p>
+      <h1>We Make Bathroom Remodeling Easy <span>And Affordable</span></h1>
+      <p class="hero-sub">Transform your bathroom with our expert team — on time, on budget, every time.</p>
+      <div class="hero-actions">
+        <a routerLink="/bookings" class="btn-primary">Book a Consultation</a>
+        <a href="#" class="btn-ghost">See Our Work</a>
+      </div>
+    </div>
+
+    <div class="hero-video-wrap">
+      <video #heroVideo autoplay [muted]="true" loop playsinline>
+        <source src="assets/file.mp4" type="video/mp4" />
+      </video>
     </div>
   </div>
+
+  <div class="slide-dots">
+    @for (slide of slides; track slide; let i = $index) {
+      <button class="dot" [class.active]="i === activeSlide" (click)="activeSlide = i" [attr.aria-label]="'Slide ' + (i + 1)"></button>
+    }
+  </div>
 </section>
+
+<app-process />
+<app-pricing />
+<app-about />
+<app-portfolio />
+<app-testimonials />

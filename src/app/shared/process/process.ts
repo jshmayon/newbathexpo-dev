@@ -2,12 +2,12 @@ import { Component, inject } from '@angular/core';
 import { ContentService } from '../../service/content';
 
 @Component({
-  selector: 'app-services',
+  selector: 'app-process',
   imports: [],
-  templateUrl: './services.html',
-  styleUrl: './services.scss',
+  templateUrl: './process.html',
+  styleUrl: './process.scss',
 })
-export class Services {
+export class Process {
   private contentService = inject(ContentService);
-  items = this.contentService.services;
+  steps = this.contentService.steps;
 }
