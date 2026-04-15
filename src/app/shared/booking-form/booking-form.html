@@ -1,25 +1,25 @@
-<form class="booking-form">
+<form class="booking-form" (ngSubmit)="onSubmit(f)" #f="ngForm">
   <div class="form-row">
     <div class="form-group">
       <label>First Name</label>
-      <input type="text" placeholder="John" />
+      <input type="text" placeholder="John" [(ngModel)]="form.firstName" name="firstName" required />
     </div>
     <div class="form-group">
       <label>Last Name</label>
-      <input type="text" placeholder="Doe" />
+      <input type="text" placeholder="Doe" [(ngModel)]="form.lastName" name="lastName" required />
     </div>
   </div>
   <div class="form-group">
     <label>Email</label>
-    <input type="email" placeholder="john@example.com" />
+    <input type="email" placeholder="john@example.com" [(ngModel)]="form.email" name="email" required />
   </div>
   <div class="form-group">
     <label>Phone</label>
-    <input type="tel" placeholder="(555) 000-0000" />
+    <input type="tel" placeholder="(555) 000-0000" [(ngModel)]="form.phone" name="phone" required />
   </div>
   <div class="form-group">
     <label>Service Type</label>
-    <select>
+    <select [(ngModel)]="form.serviceType" name="serviceType" required>
       <option value="" disabled selected>Select a service...</option>
       <option value="consultation">In-Home or Virtual Consultation</option>
       <option value="tub-to-shower">Tub-to-Shower Remodel</option>
@@ -30,11 +30,19 @@
   </div>
   <div class="form-group">
     <label>Preferred Date</label>
-    <input type="date" />
+    <input type="date" [(ngModel)]="form.preferredDate" name="preferredDate" required />
   </div>
   <div class="form-group">
     <label>Project Details</label>
-    <textarea rows="4" placeholder="Tell us about your bathroom remodel..."></textarea>
+    <textarea rows="4" placeholder="Tell us about your bathroom remodel..." [(ngModel)]="form.projectDetails" name="projectDetails"></textarea>
   </div>
-  <button type="submit" class="submit-btn">Request Consultation</button>
+  @if (status === 'success') {
+    <p class="form-msg success">Your request was sent! We'll be in touch soon.</p>
+  }
+  @if (status === 'error') {
+    <p class="form-msg error">Something went wrong. Please try again or call us directly.</p>
+  }
+  <button type="submit" class="submit-btn" [disabled]="status === 'loading' || f.invalid">
+    {{ status === 'loading' ? 'Sending...' : 'Request Consultation' }}
+  </button>
 </form>
