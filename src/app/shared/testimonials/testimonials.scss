@@ -206,3 +206,17 @@ blockquote {
   .testimonial-card { flex: 0 0 280px; height: 280px; }
   .chevron { width: 36px; height: 36px; svg { width: 16px; height: 16px; } }
 }
+
+@media (max-width: 480px) {
+  .testimonials { padding: 3rem 1rem; }
+  .testimonial-card {
+    flex: 0 0 calc(100vw - 6rem);
+    height: auto;
+    min-height: 240px;
+    padding: 1.25rem;
+  }
+  .slider-wrapper { gap: 0.5rem; }
+  .chevron { width: 32px; height: 32px; }
+  .section-header { margin: 0 auto 2rem; }
+}
+

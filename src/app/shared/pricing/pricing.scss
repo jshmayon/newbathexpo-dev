@@ -142,5 +142,16 @@ h3 {
 
 @media (max-width: 600px) {
   .pricing { padding: 4rem 1.5rem; }
-  .pricing-grid { grid-template-columns: 1fr; }
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+  }
 }
+
+@media (max-width: 480px) {
+  .pricing { padding: 3rem 1.25rem; }
+  .pricing-card { padding: 2rem 1.5rem; }
+  .section-header { margin: 0 auto 3rem; }
+}
+

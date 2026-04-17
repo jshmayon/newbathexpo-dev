@@ -129,3 +129,10 @@ p {
 @media (max-width: 640px) {
   .services { padding: 4rem 1.5rem; }
 }
+
+@media (max-width: 480px) {
+  .services { padding: 3rem 1.25rem; }
+  .service-card { padding: 2rem 1.5rem; }
+  .section-header { margin: 0 auto 3rem; }
+}
+

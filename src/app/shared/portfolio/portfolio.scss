@@ -152,3 +152,10 @@ h2 {
 @media (max-width: 640px) {
   .portfolio { padding: 4rem 1.5rem; }
 }
+
+@media (max-width: 480px) {
+  .portfolio { padding: 3rem 1.25rem; }
+  .card-body { padding: 1.25rem; }
+  .section-header { margin: 0 auto 3rem; }
+}
+

@@ -80,3 +80,29 @@
 @media (max-width: 640px) {
   .about { padding: 4rem 1.5rem; }
 }
+
+@media (max-width: 480px) {
+  .about { padding: 3rem 1.25rem; }
+
+  .about-left {
+    text-align: center;
+
+    .divider {
+      margin: 0 auto;
+    }
+  }
+
+  .about-right {
+    text-align: center;
+
+    p {
+      font-size: 0.95rem;
+    }
+  }
+
+  .learn-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
