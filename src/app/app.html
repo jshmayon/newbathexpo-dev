@@ -1,3 +1,7 @@
-<app-header />
+@if (!isKiosk()) {
+  <app-header />
+}
 <router-outlet />
-<app-footer />
+@if (!isKiosk()) {
+  <app-footer />
+}

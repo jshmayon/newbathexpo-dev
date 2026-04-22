@@ -1,0 +1,79 @@
+<app-page-hero
+  bgImage="/assets/shower_colors/Dimensions_SimTile_10x20_Gray-scaled-edit.png"
+  eyebrow="Colors & Trim"
+  title="Dimensions SimTile"
+  subtitle="Large-format tile aesthetics with remarkable depth — and zero grout maintenance.">
+</app-page-hero>
+
+<!-- Back link -->
+<div class="cat-back-wrap">
+  <div class="cat-inner">
+    <a routerLink="/products/colors-and-trim" class="btn-back">
+      <span>&larr;</span> Back to Colors &amp; Trim
+    </a>
+  </div>
+</div>
+
+<!-- Section 1: Gallery -->
+<section class="dims-gallery-section">
+  <div class="cat-inner">
+    <div class="gallery-header">
+      <h2>Transform Your Shower With Dimensions SimTile</h2>
+      <p class="gallery-subhead">Discover the Dimensions SimTile That Works for Your Space</p>
+    </div>
+
+    <app-product-gallery [items]="galleryItems" [columns]="4"></app-product-gallery>
+  </div>
+</section>
+
+<!-- Section 2: Why Choose -->
+<section class="why-section">
+  <div class="cat-inner">
+    <div class="why-layout">
+      <div class="why-content">
+        <h2>Why Dimensions SimTile Is the Trusted Choice for Contractors and Homeowners Alike</h2>
+        <p class="why-desc">
+          Dimensions SimTile delivers the bold, large-format tile look professionals specify and homeowners love —
+          without the cost, complexity, or upkeep of real tile. It's a proven solution trusted across residential
+          remodels, new builds, and multi-family projects.
+        </p>
+        <ul class="why-list">
+          <li>
+            <div class="why-number">1</div>
+            <div class="why-text">
+              <strong>Realistic Appearance</strong>
+              <p>High-resolution printing and textured surfaces replicate the depth and character of real large-format tile with striking accuracy.</p>
+            </div>
+          </li>
+          <li>
+            <div class="why-number">2</div>
+            <div class="why-text">
+              <strong>Quick Installation</strong>
+              <p>Panels go up in a fraction of the time traditional tile requires, reducing labor costs and keeping projects on schedule.</p>
+            </div>
+          </li>
+          <li>
+            <div class="why-number">3</div>
+            <div class="why-text">
+              <strong>Easy Maintenance</strong>
+              <p>Grout-free surfaces mean no scrubbing, no re-sealing, and no mold hiding in joints — just a simple wipe to stay pristine.</p>
+            </div>
+          </li>
+          <li>
+            <div class="why-number">4</div>
+            <div class="why-text">
+              <strong>Durability</strong>
+              <p>Built from a multi-layer composite engineered for the demands of daily shower use — resistant to impact, moisture, and fading.</p>
+            </div>
+          </li>
+        </ul>
+        <a routerLink="/bookings" class="btn-primary">Book a Consultation</a>
+      </div>
+      <div class="why-image">
+        <img src="/assets/baths/25.png" alt="Dimensions SimTile Shower" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-gallery-callout></app-gallery-callout>

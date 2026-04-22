@@ -5,12 +5,7 @@
     </a>
 
     <!-- Mobile hamburger button -->
-    <button
-      class="menu-toggle"
-      [class.open]="menuOpen"
-      (click)="toggleMenu()"
-      aria-label="Toggle navigation menu"
-    >
+    <button class="menu-toggle" [class.open]="menuOpen" (click)="toggleMenu()" aria-label="Toggle navigation menu">
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
@@ -18,14 +13,39 @@
 
     <!-- Navigation links -->
     <nav class="nav-links" [class.show]="menuOpen">
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="closeMenu()">Home</a>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
+        (click)="closeMenu()">Home</a>
+      
+      <div class="dropdown">
+        <a routerLink="/products" routerLinkActive="active" (click)="closeMenu()">Products</a>
+        <div class="dropdown-content">
+          <a routerLink="/products/shower-wall-systems" routerLinkActive="active" (click)="closeMenu()">Shower Wall Systems</a>
+          <a routerLink="/products/shower-floors-and-bases" routerLinkActive="active" (click)="closeMenu()">Shower Floors & Bases</a>
+          <a routerLink="/products/shower-accessories" routerLinkActive="active" (click)="closeMenu()">Shower Accessories</a>
+          <a routerLink="/products/colors-and-trim" routerLinkActive="active" (click)="closeMenu()">Colors & Trim</a>
+        </div>
+      </div>
+
       <a routerLink="/gallery" routerLinkActive="active" (click)="closeMenu()">Gallery</a>
-      <a routerLink="/bookings" routerLinkActive="active" (click)="closeMenu()">Bookings</a>
+
+      <div class="dropdown">
+        <a routerLink="/book-now" routerLinkActive="active" (click)="closeMenu()">Book Now</a>
+        <div class="dropdown-content book-dropdown">
+          <a routerLink="/bookings" routerLinkActive="active" (click)="closeMenu()">
+            <span class="dropdown-item-title">Request a Booking</span>
+            <span class="dropdown-item-desc">Schedule a free consultation or remodel service</span>
+          </a>
+          <a routerLink="/design-request" routerLinkActive="active" (click)="closeMenu()">
+            <span class="dropdown-item-title">Design Request</span>
+            <span class="dropdown-item-desc">Share your preferences for a custom bathroom design</span>
+          </a>
+        </div>
+      </div>
     </nav>
   </div>
 </header>
 
 <!-- Mobile overlay backdrop -->
 @if (menuOpen) {
-  <div class="nav-backdrop" (click)="closeMenu()"></div>
+<div class="nav-backdrop" (click)="closeMenu()"></div>
 }

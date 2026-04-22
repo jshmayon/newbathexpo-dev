@@ -1,0 +1,50 @@
+<app-page-hero
+  bgImage="/assets/baths/10.jpg"
+  eyebrow="Colors & Trim"
+  title="Stone Colors"
+  subtitle="Authentic stone beauty — low maintenance, durable, and endlessly customizable.">
+</app-page-hero>
+
+<!-- Gallery Section -->
+<section class="stone-gallery-section">
+  <div class="gallery-inner">
+    <a routerLink="/products/colors-and-trim" class="btn-back">
+      <span class="icon">&larr;</span> Back to Colors &amp; Trim
+    </a>
+
+    <div class="gallery-header">
+      <h2>Explore Our Full Range of Low-Maintenance Shower Wall Colors</h2>
+    </div>
+
+    <app-product-gallery [items]="stoneColors"></app-product-gallery>
+  </div>
+</section>
+
+<!-- Elevate Section -->
+<section class="elevate-section">
+  <div class="elevate-inner">
+    <div class="elevate-image">
+      <img src="/assets/baths/10.jpg" alt="New Bath Expo Shower" />
+    </div>
+    <div class="elevate-content">
+      <h2>Elevate Your Bathroom Interior With New Bath Expo Shower Walls, Floors, and Accessories</h2>
+      <ol class="elevate-list">
+        <li>
+          <strong>Low Maintenance:</strong> Our shower walls are easy to clean and require minimal upkeep.
+        </li>
+        <li>
+          <strong>Durable and Long-Lasting:</strong> New Bath Expo products are made from a high-quality composite material that's built to last.
+        </li>
+        <li>
+          <strong>Cost-Effective:</strong> Enjoy the luxury of real stone without the high cost.
+        </li>
+        <li>
+          <strong>Customizable:</strong> Find the perfect fit for any aesthetic with our broad range of colors, patterns, and accessories.
+        </li>
+      </ol>
+      <a routerLink="/bookings" class="btn-primary">Start Your Project</a>
+    </div>
+  </div>
+</section>
+
+<app-gallery-callout></app-gallery-callout>

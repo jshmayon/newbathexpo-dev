@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Kiosk-only page — not a public content page
+Disallow: /showroom
+
+Sitemap: https://www.newbathexpo.com/sitemap.xml

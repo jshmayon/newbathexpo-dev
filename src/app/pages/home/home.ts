@@ -7,6 +7,7 @@ import { Pricing } from '../../shared/pricing/pricing';
 import { About } from '../../shared/about/about';
 import { Portfolio } from '../../shared/portfolio/portfolio';
 import { Testimonials } from '../../shared/testimonials/testimonials';
+import { SeoService } from '../../service/seo.service';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +27,18 @@ export class Home implements OnInit, OnDestroy {
 
   activeSlide = 0;
   private interval: ReturnType<typeof setInterval> | null = null;
+
+  constructor() {
+    inject(SeoService).set({
+      title: 'New Bath Expo | Bathroom Remodeling on the Monterey Peninsula',
+      description:
+        'Transform your bathroom with New Bath Expo — premium Sentrel shower wall systems, tub-to-shower conversions, and full remodels. Serving Pacific Grove, Monterey, Carmel, and the Monterey Peninsula.',
+      keywords:
+        'bathroom remodeling monterey, shower wall systems, tub to shower conversion, sentrel panels, pacific grove bathroom remodel, monterey peninsula bathroom',
+      canonical: '/',
+      ogImage: 'https://www.newbathexpo.com/assets/portfolio/luxurious-retreat.jpg',
+    });
+  }
 
   ngOnInit() {
     if (!isPlatformBrowser(this.platformId)) return;

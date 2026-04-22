@@ -1,0 +1,74 @@
+<app-page-hero bgImage="/assets/baths/6.jpg" eyebrow="Our Products" title="Shower Accessories"
+  subtitle="Add the perfect finishing touches with premium hardware, stylish caddies, and safety grab bars.">
+</app-page-hero>
+
+<section class="accessories-gallery-section">
+  <div class="gallery-inner">
+    <a routerLink="/products" class="btn-back">
+      <span class="icon">&larr;</span> Back to All Selections
+    </a>
+
+    <div class="gallery-header" style="text-align: center; margin-bottom: 3rem;">
+      <h2 style="font-size: 2rem; font-weight: 700; color: var(--color-text);">Explore Our Full Range of Shower
+        Accessories</h2>
+    </div>
+
+    <div class="accessory-grid">
+      @for (item of accessories; track item.id; let i = $index) {
+      <div class="accessory-card" (click)="openLightbox(i)">
+        <div class="image-container">
+          <img [src]="item.imageUrl" [alt]="item.label" />
+        </div>
+        <div class="label-overlay">
+          <h3>{{ item.label }}</h3>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+@if (lightboxIndex() !== null) {
+<div class="lightbox" (click)="closeLightbox()">
+  <button class="lightbox-close" (click)="closeLightbox()">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+
+  <button class="lightbox-nav lightbox-prev" (click)="prevImage($event)">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+
+  <button class="lightbox-nav lightbox-next" (click)="nextImage($event)">
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
+
+  <div class="lightbox-content" (click)="$event.stopPropagation()">
+    <img [src]="accessories[lightboxIndex()!].imageUrl" [alt]="accessories[lightboxIndex()!].label" />
+    <div class="lightbox-label">
+      <h3>{{ accessories[lightboxIndex()!].label }}</h3>
+    </div>
+  </div>
+
+  <div class="lightbox-counter">
+    {{ lightboxIndex()! + 1 }} / {{ accessories.length }}
+  </div>
+</div>
+}
+
+
+<section class="accessories-intro-section">
+  <div class="intro-inner">
+    <div class="intro-text">
+      <h2>Create a Personalized Bathroom With New Bath Expo Shower Accessories</h2>
+      <p>Elevate your daily routine with our collection of seamlessly integrated shower accessories. From sleek modern
+        shelving to luxurious seating solutions, each beautifully crafted piece is designed to perfectly complement your
+        space.</p>
+    </div>
+    <div class="intro-action">
+      <a routerLink="/bookings" class="btn-primary">Accessorize my Shower</a>
+    </div>
+  </div>
+</section>
+
+<app-gallery-callout></app-gallery-callout>

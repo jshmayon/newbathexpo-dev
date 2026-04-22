@@ -1,0 +1,120 @@
+<form class="design-request-form" (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="form-row">
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" placeholder="John" [(ngModel)]="form.firstName" name="firstName" required />
+    </div>
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" placeholder="Doe" [(ngModel)]="form.lastName" name="lastName" required />
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" placeholder="john@example.com" [(ngModel)]="form.email" name="email" required />
+    </div>
+    <div class="form-group">
+      <label>Phone</label>
+      <input type="tel" placeholder="(555) 000-0000" [(ngModel)]="form.phone" name="phone" required />
+    </div>
+  </div>
+
+  <div class="section-label">Design Preferences <span class="optional">(all optional)</span></div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>Wall Design</label>
+      <select [(ngModel)]="form.wallDesign" name="wallDesign">
+        <option value="">No preference</option>
+        @for (opt of options.wallDesign; track opt.value) {
+          <option [value]="opt.value">{{ opt.label }}</option>
+        }
+      </select>
+      @if (form.wallDesign === 'others') {
+        <input type="text" placeholder="Describe your wall design preference..." [(ngModel)]="form.wallDesignOther" name="wallDesignOther" class="other-input" />
+      }
+    </div>
+    <div class="form-group">
+      <label>Tiles</label>
+      <select [(ngModel)]="form.tiles" name="tiles">
+        <option value="">No preference</option>
+        @for (opt of options.tiles; track opt.value) {
+          <option [value]="opt.value">{{ opt.label }}</option>
+        }
+      </select>
+      @if (form.tiles === 'others') {
+        <input type="text" placeholder="Describe your tile preference..." [(ngModel)]="form.tilesOther" name="tilesOther" class="other-input" />
+      }
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>Bath / Tub</label>
+      <select [(ngModel)]="form.bath" name="bath">
+        <option value="">No preference</option>
+        @for (opt of options.bath; track opt.value) {
+          <option [value]="opt.value">{{ opt.label }}</option>
+        }
+      </select>
+      @if (form.bath === 'others') {
+        <input type="text" placeholder="Describe your bath/tub preference..." [(ngModel)]="form.bathOther" name="bathOther" class="other-input" />
+      }
+    </div>
+    <div class="form-group">
+      <label>Sink</label>
+      <select [(ngModel)]="form.sink" name="sink">
+        <option value="">No preference</option>
+        @for (opt of options.sink; track opt.value) {
+          <option [value]="opt.value">{{ opt.label }}</option>
+        }
+      </select>
+      @if (form.sink === 'others') {
+        <input type="text" placeholder="Describe your sink preference..." [(ngModel)]="form.sinkOther" name="sinkOther" class="other-input" />
+      }
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>Faucet</label>
+      <select [(ngModel)]="form.faucet" name="faucet">
+        <option value="">No preference</option>
+        @for (opt of options.faucet; track opt.value) {
+          <option [value]="opt.value">{{ opt.label }}</option>
+        }
+      </select>
+      @if (form.faucet === 'others') {
+        <input type="text" placeholder="Describe your faucet preference..." [(ngModel)]="form.faucetOther" name="faucetOther" class="other-input" />
+      }
+    </div>
+    <div class="form-group">
+      <label>Shower</label>
+      <select [(ngModel)]="form.shower" name="shower">
+        <option value="">No preference</option>
+        @for (opt of options.shower; track opt.value) {
+          <option [value]="opt.value">{{ opt.label }}</option>
+        }
+      </select>
+      @if (form.shower === 'others') {
+        <input type="text" placeholder="Describe your shower preference..." [(ngModel)]="form.showerOther" name="showerOther" class="other-input" />
+      }
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Additional Notes</label>
+    <textarea rows="4" placeholder="Any other design ideas, inspirations, or requirements..." [(ngModel)]="form.notes" name="notes"></textarea>
+  </div>
+
+  @if (status === 'success') {
+    <p class="form-msg success">Your design request was sent! We'll reach out to discuss your vision.</p>
+  }
+  @if (status === 'error') {
+    <p class="form-msg error">Something went wrong. Please try again or call us directly.</p>
+  }
+  <button type="submit" class="submit-btn" [disabled]="status === 'loading' || f.invalid">
+    {{ status === 'loading' ? 'Sending...' : 'Submit Design Request' }}
+  </button>
+</form>

@@ -1,0 +1,37 @@
+<div class="pg-grid" [style.grid-template-columns]="gridTemplateCols()">
+  @for (item of items(); track item.imageUrl; let i = $index) {
+  <div class="pg-card" (click)="openLightbox(i)">
+    <div class="pg-image-box">
+      <img [src]="item.imageUrl" [alt]="item.label" loading="lazy" />
+    </div>
+    <p class="pg-label">{{ item.label }}</p>
+  </div>
+  }
+</div>
+
+@if (lightboxIndex() !== null) {
+<div class="lightbox" (click)="closeLightbox()">
+  <button class="lightbox-close" (click)="closeLightbox()">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+
+  <button class="lightbox-nav lightbox-prev" (click)="prevImage($event)">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+
+  <button class="lightbox-nav lightbox-next" (click)="nextImage($event)">
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
+
+  <div class="lightbox-content" (click)="$event.stopPropagation()">
+    <img [src]="items()[lightboxIndex()!].imageUrl" [alt]="items()[lightboxIndex()!].label" />
+    <div class="lightbox-label">
+      <h3>{{ items()[lightboxIndex()!].label }}</h3>
+    </div>
+  </div>
+
+  <div class="lightbox-counter">
+    {{ lightboxIndex()! + 1 }} / {{ items().length }}
+  </div>
+</div>
+}

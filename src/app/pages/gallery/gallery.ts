@@ -1,72 +1,51 @@
 import { Component, signal, computed, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { Meta, Title } from '@angular/platform-browser';
-
-interface GalleryImage {
-  src: string;
-  alt: string;
-  loaded: boolean;
-}
+import { PageHero } from '../../shared/page-hero/page-hero';
+import { SeoService } from '../../service/seo.service';
+import { GalleryService } from '../../service/gallery.service';
 
 @Component({
   selector: 'app-gallery',
-  imports: [RouterLink],
+  imports: [RouterLink, PageHero],
   templateUrl: './gallery.html',
   styleUrl: './gallery.scss',
 })
 export class Gallery {
   private platformId = inject(PLATFORM_ID);
-  private meta = inject(Meta);
-  private titleService = inject(Title);
+  readonly galleryService = inject(GalleryService);
 
-  // All bath images from assets/baths
-  images = signal<GalleryImage[]>([
-    { src: 'assets/baths/1.jpg', alt: 'Bathroom Design 1', loaded: false },
-    { src: 'assets/baths/2.jpg', alt: 'Bathroom Design 2', loaded: false },
-    { src: 'assets/baths/4.jpg', alt: 'Bathroom Design 3', loaded: false },
-    { src: 'assets/baths/5.jpg', alt: 'Bathroom Design 4', loaded: false },
-    { src: 'assets/baths/6.jpg', alt: 'Bathroom Design 5', loaded: false },
-    { src: 'assets/baths/7.jpg', alt: 'Bathroom Design 6', loaded: false },
-    { src: 'assets/baths/8.jpg', alt: 'Bathroom Design 7', loaded: false },
-    { src: 'assets/baths/9.jpg', alt: 'Bathroom Design 8', loaded: false },
-    { src: 'assets/baths/10.jpg', alt: 'Bathroom Design 9', loaded: false },
-    { src: 'assets/baths/11.jpg', alt: 'Bathroom Design 10', loaded: false },
-    { src: 'assets/baths/12.jpg', alt: 'Bathroom Design 11', loaded: false },
-    { src: 'assets/baths/13.jpg', alt: 'Bathroom Design 12', loaded: false },
-    { src: 'assets/baths/14.jpg', alt: 'Bathroom Design 13', loaded: false },
-    { src: 'assets/baths/15.jpg', alt: 'Bathroom Design 14', loaded: false },
-    { src: 'assets/baths/16.jpg', alt: 'Bathroom Design 15', loaded: false },
-    { src: 'assets/baths/17.jpg', alt: 'Bathroom Design 16', loaded: false },
-    { src: 'assets/baths/18.jpg', alt: 'Bathroom Design 17', loaded: false },
-    { src: 'assets/baths/20.jpg', alt: 'Bathroom Design 18', loaded: false },
-    { src: 'assets/baths/21.jpg', alt: 'Bathroom Design 19', loaded: false },
-    { src: 'assets/baths/22.jpg', alt: 'Bathroom Design 20', loaded: false },
-    { src: 'assets/baths/23.jpg', alt: 'Bathroom Design 21', loaded: false },
-    { src: 'assets/baths/24.jpg', alt: 'Bathroom Design 22', loaded: false },
-  ]);
+  loaded = signal<boolean[]>(new Array(this.galleryService.items.length).fill(false));
 
-  // Lightbox state
   lightboxOpen = signal(false);
   lightboxIndex = signal(0);
-  lightboxImage = computed(() => this.images()[this.lightboxIndex()]);
+  lightboxItem = computed(() => this.galleryService.items[this.lightboxIndex()]);
+  lightboxFull = signal(false);
 
   constructor() {
-    this.titleService.setTitle('Design Gallery — NewBath Expo');
-    this.meta.updateTag({ name: 'description', content: 'Browse our curated gallery of stunning bathroom designs. Get inspired for your next bathroom remodel with NewBath Expo.' });
+    inject(SeoService).set({
+      title: 'Bathroom Design Gallery',
+      description:
+        'Browse our curated gallery of stunning bathroom transformations on the Monterey Peninsula. Get inspired for your next shower remodel with New Bath Expo — real projects, real results.',
+      keywords:
+        'bathroom design gallery, shower remodel photos, bathroom renovation monterey, before after bathroom remodel, sentrel bathroom designs',
+      canonical: '/gallery',
+      ogImage: 'https://www.newbathexpo.com/assets/baths/5.jpg',
+    });
   }
 
   onImageLoad(index: number) {
-    this.images.update(imgs => {
-      const updated = [...imgs];
-      updated[index] = { ...updated[index], loaded: true };
-      return updated;
+    this.loaded.update((arr) => {
+      const copy = [...arr];
+      copy[index] = true;
+      return copy;
     });
   }
 
   openLightbox(index: number) {
     this.lightboxIndex.set(index);
     this.lightboxOpen.set(true);
+    this.lightboxFull.set(false);
     if (isPlatformBrowser(this.platformId)) {
       document.body.style.overflow = 'hidden';
     }
@@ -74,21 +53,29 @@ export class Gallery {
 
   closeLightbox() {
     this.lightboxOpen.set(false);
+    this.lightboxFull.set(false);
     if (isPlatformBrowser(this.platformId)) {
       document.body.style.overflow = '';
     }
   }
 
+  toggleFull(event: Event) {
+    event.stopPropagation();
+    this.lightboxFull.update(v => !v);
+  }
+
   prevImage(event: Event) {
     event.stopPropagation();
-    const total = this.images().length;
-    this.lightboxIndex.update(i => (i - 1 + total) % total);
+    this.lightboxFull.set(false);
+    const total = this.galleryService.items.length;
+    this.lightboxIndex.update((i) => (i - 1 + total) % total);
   }
 
   nextImage(event: Event) {
     event.stopPropagation();
-    const total = this.images().length;
-    this.lightboxIndex.update(i => (i + 1) % total);
+    this.lightboxFull.set(false);
+    const total = this.galleryService.items.length;
+    this.lightboxIndex.update((i) => (i + 1) % total);
   }
 
   onKeydown(event: KeyboardEvent) {

@@ -4,72 +4,6 @@
   background: var(--color-bg);
 }
 
-.bookings-hero {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 52vh;
-  overflow: hidden;
-}
-
-.bookings-hero-bg {
-  position: absolute;
-  inset: 0;
-  background: url('/assets/baths/23.jpg') center / cover no-repeat;
-  transform: scale(1.05);
-  animation: heroZoom 20s ease-in-out infinite alternate;
-}
-
-@keyframes heroZoom {
-  from { transform: scale(1); }
-  to { transform: scale(1.12); }
-}
-
-.bookings-hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(7, 13, 98, 0.82) 0%,
-    rgba(11, 19, 140, 0.55) 50%,
-    rgba(0, 0, 0, 0.35) 100%
-  );
-}
-
-.bookings-hero-inner {
-  position: relative;
-  z-index: 2;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  text-align: center;
-  color: #fff;
-  padding: 8rem 2rem 4rem;
-  max-width: 720px;
-}
-
-.eyebrow {
-  font-size: var(--text-sm);
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 1rem;
-}
-
-h1 {
-  font-size: var(--text-xl);
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  margin-bottom: 1.25rem;
-}
-
-.subtitle {
-  font-size: var(--text-md);
-  color: rgba(255, 255, 255, 0.75);
-  line-height: 1.65;
-}
 
 .bookings-page {
   display: flex;
@@ -87,15 +21,9 @@ h1 {
   margin-top: -3rem;
 }
 
-@media (max-width: 900px) {
-  .bookings-hero-inner {
-    padding: 7rem 1.5rem 3.5rem;
+@media (max-width: 640px) {
+  .bookings-card {
+    padding: 2rem 1.25rem;
+    margin-top: -2rem;
   }
 }
-
-@media (max-width: 640px) {
-  .bookings-hero { min-height: 42vh; }
-  .bookings-hero-inner { padding: 7rem 1.5rem 3.5rem; }
-  .bookings-card { padding: 2rem 1.25rem; margin-top: -2rem; }
-}
-

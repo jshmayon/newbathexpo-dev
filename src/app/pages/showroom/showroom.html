@@ -1,0 +1,598 @@
+<!-- ===================== IDLE OVERLAY ===================== -->
+<div class="idle-overlay" [class.visible]="idleVisible()">
+  <img src="assets/baths/17.jpg" alt="Luxurious bathroom" class="idle-bg" />
+  <div class="idle-scrim"></div>
+  <div class="idle-content">
+    <img src="assets/logo-text.png" alt="New Bath Expo" class="idle-logo" />
+    <h1 class="idle-headline">Beautiful Bathrooms<br>Start Here</h1>
+    <p class="idle-sub">Premium Sentrel shower systems — designed for your home</p>
+    <button class="tap-btn" (click)="tapToExplore()">
+      <span class="tap-pulse"></span>
+      Tap to Explore
+    </button>
+  </div>
+</div>
+
+<!-- ===================== KIOSK WRAP ===================== -->
+<div class="kiosk-wrap" [class.hidden]="idleVisible()">
+
+  <!-- Top bar -->
+  <header class="kiosk-bar">
+    <img src="assets/logo-text.png" alt="New Bath Expo" class="bar-logo" />
+
+    <nav class="bar-breadcrumb">
+      @for (crumb of breadcrumb(); track crumb; let last = $last) {
+        <span class="crumb">{{ crumb }}</span>
+        @if (!last) { <span class="crumb-sep">›</span> }
+      }
+    </nav>
+
+    <div class="bar-actions">
+      @if (view() !== 'home') {
+        <button class="bar-back-btn" (click)="goBack()">&#8592; Back</button>
+      }
+      <button class="reset-btn" (click)="resetToStart()">&#8635; Reset</button>
+    </div>
+  </header>
+
+  <!-- ======= KIOSK CONTENT ======= -->
+  <div class="kiosk-content">
+
+    <!-- ── HOME VIEW ── -->
+    @if (view() === 'home') {
+      <div class="home-view">
+        <div class="home-heading">
+          <h2>Welcome to New Bath Expo</h2>
+          <p>Explore our gallery, browse products, or book your free consultation</p>
+        </div>
+
+        <div class="home-tiles">
+          <button class="home-tile" (click)="navTo('gallery')">
+            <img src="assets/baths/14.jpg" alt="Gallery" />
+            <div class="tile-overlay">
+              <i class="fa-regular fa-images tile-icon"></i>
+              <h3>Gallery</h3>
+              <p>Browse 22+ real bathroom designs with full specs</p>
+              <span class="tile-cta">Tap to explore ›</span>
+            </div>
+          </button>
+
+          <button class="home-tile" (click)="navTo('products')">
+            <img src="assets/baths/1.jpg" alt="Products" />
+            <div class="tile-overlay">
+              <i class="fa-solid fa-layer-group tile-icon"></i>
+              <h3>Our Products</h3>
+              <p>Wall systems, floors, accessories & colors</p>
+              <span class="tile-cta">Tap to explore ›</span>
+            </div>
+          </button>
+
+          <button class="home-tile" (click)="navTo('forms')">
+            <img src="assets/baths/21.jpg" alt="Book Now" />
+            <div class="tile-overlay">
+              <i class="fa-regular fa-calendar-check tile-icon"></i>
+              <h3>Book Now</h3>
+              <p>Request a consultation or submit a design preference</p>
+              <span class="tile-cta">Tap to get started ›</span>
+            </div>
+          </button>
+        </div>
+
+        <div class="home-dial">
+          <button class="home-dial-btn" (click)="openQuote()">
+            <i class="fa-solid fa-bolt"></i>
+            Quick Quote
+          </button>
+          <button class="home-dial-btn home-dial-btn--accent" (click)="openForm('booking')">
+            <i class="fa-regular fa-calendar-check"></i>
+            Book a Consultation
+          </button>
+          <button class="home-dial-btn home-dial-btn--accent" (click)="openForm('design')">
+            <i class="fa-solid fa-pencil-ruler"></i>
+            Design Request
+          </button>
+        </div>
+      </div>
+    }
+
+    <!-- ── GALLERY VIEW ── -->
+    @if (view() === 'gallery') {
+      <div class="gallery-view">
+        <div class="view-heading">
+          <h2>Design Gallery</h2>
+          <p>Tap any photo to see the full design specs</p>
+        </div>
+
+        <div class="kiosk-gallery-grid">
+          @for (item of gallery.items; track item.src) {
+            <button class="kg-item" (click)="selectGalleryImage(item)">
+              <img [src]="item.src" [alt]="item.alt" loading="lazy" />
+              <div class="kg-overlay">
+                <span class="kg-title">{{ item.title }}</span>
+                <span class="kg-style">{{ item.style }}</span>
+              </div>
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- Gallery detail overlay -->
+      @if (gallerySelected(); as selected) {
+        <div class="gallery-detail-backdrop" (click)="closeGalleryDetail()">
+          <div class="gallery-detail-panel" (click)="$event.stopPropagation()">
+            <button class="detail-close" (click)="closeGalleryDetail()">&#10005;</button>
+            <div class="detail-image-wrap">
+              <img [src]="selected.src" [alt]="selected.alt" />
+            </div>
+            <div class="detail-specs">
+              <h2>{{ selected.title }}</h2>
+              <span class="detail-style-tag">{{ selected.style }}</span>
+
+              <div class="detail-spec-list">
+                <div class="detail-spec-row">
+                  <span class="dsr-key">Wall System</span>
+                  <span class="dsr-val">{{ selected.wallSystem }}</span>
+                </div>
+                <div class="detail-spec-row">
+                  <span class="dsr-key">Tile</span>
+                  <span class="dsr-val">{{ selected.tile }}</span>
+                </div>
+                <div class="detail-spec-row">
+                  <span class="dsr-key">Finish</span>
+                  <span class="dsr-val">{{ selected.finish }}</span>
+                </div>
+              </div>
+
+              <div class="detail-features">
+                @for (f of selected.features; track f) {
+                  <span class="detail-chip">{{ f }}</span>
+                }
+              </div>
+
+              <button class="detail-quote-btn" (click)="openQuote(); closeGalleryDetail()">
+                <i class="fa-solid fa-comment-dots"></i>
+                Request This Style
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    }
+
+    <!-- ── PRODUCTS VIEW ── -->
+    @if (view() === 'products') {
+
+      <!-- Products menu -->
+      @if (productView() === 'menu') {
+        <div class="products-view">
+          <div class="view-heading">
+            <h2>Our Products</h2>
+            <p>Tap a category to learn more</p>
+          </div>
+
+          <div class="products-grid">
+            <button class="prod-card" (click)="navToProduct('walls')">
+              <img src="assets/baths/1.jpg" alt="Shower Wall Systems" />
+              <div class="prod-card-body">
+                <h3>Shower Wall Systems</h3>
+                <p>Waterproof · Grout-free · Stunning</p>
+              </div>
+            </button>
+
+            <button class="prod-card" (click)="navToProduct('floors')">
+              <img src="assets/baths/8.jpg" alt="Shower Floors & Bases" />
+              <div class="prod-card-body">
+                <h3>Shower Floors & Bases</h3>
+                <p>Slip-resistant · Low-profile · Durable</p>
+              </div>
+            </button>
+
+            <button class="prod-card" (click)="navToProduct('accessories')">
+              <img src="assets/baths/10.jpg" alt="Shower Accessories" />
+              <div class="prod-card-body">
+                <h3>Shower Accessories</h3>
+                <p>Shelves · Benches · Trim</p>
+              </div>
+            </button>
+
+            <button class="prod-card" (click)="navToProduct('colors-menu')">
+              <img src="assets/baths/12.jpg" alt="Colors & Trim" />
+              <div class="prod-card-body">
+                <h3>Colors & Trim</h3>
+                <p>Dozens of finishes · Mix & match</p>
+              </div>
+            </button>
+          </div>
+        </div>
+      }
+
+      <!-- Wall Systems detail -->
+      @if (productView() === 'walls') {
+        <div class="product-detail-view">
+          <div class="prod-detail-layout">
+            <img src="assets/baths/1.jpg" alt="Shower Wall Systems" class="prod-detail-img" />
+            <div class="prod-detail-info">
+              <h2>Shower Wall Systems</h2>
+              <p class="prod-detail-desc">
+                Sentrel shower wall panels install directly over existing tile or drywall — no demo required.
+                Waterproof, grout-free, and available in dozens of beautiful textures and colors.
+                Transform your shower in as little as one day.
+              </p>
+              <ul class="prod-features">
+                <li>100% waterproof — no grout lines to clean</li>
+                <li>Installs over existing surfaces — no demolition</li>
+                <li>Available in 20+ stone colors and tile patterns</li>
+                <li>Backed by a lifetime warranty</li>
+              </ul>
+              <div class="prod-actions">
+                <button class="prod-quote-btn" (click)="openQuote('walls')">Request a Free Quote</button>
+                <a routerLink="/products/shower-wall-systems" class="prod-website-link">View on Website ›</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- Floors detail -->
+      @if (productView() === 'floors') {
+        <div class="product-detail-view">
+          <div class="prod-detail-layout">
+            <img src="assets/baths/8.jpg" alt="Shower Floors & Bases" class="prod-detail-img" />
+            <div class="prod-detail-info">
+              <h2>Shower Floors & Bases</h2>
+              <p class="prod-detail-desc">
+                Our shower bases are engineered for safety and style. Slip-resistant texture,
+                low-profile design, and a perfect match to Sentrel wall systems.
+                Available in multiple sizes and colors.
+              </p>
+              <ul class="prod-features">
+                <li>Slip-resistant textured surface for safety</li>
+                <li>Low-profile design — easy step-in access</li>
+                <li>Perfectly matched to wall panel collections</li>
+                <li>Multiple sizes to fit any shower footprint</li>
+              </ul>
+              <div class="prod-actions">
+                <button class="prod-quote-btn" (click)="openQuote('floors')">Request a Free Quote</button>
+                <a routerLink="/products/shower-floors-and-bases" class="prod-website-link">View on Website ›</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- Accessories -->
+      @if (productView() === 'accessories') {
+        <div class="accessories-view">
+          <div class="view-heading">
+            <h2>Shower Accessories</h2>
+            <p>Complete your shower with functional, elegant add-ons</p>
+          </div>
+          <div class="accessories-grid">
+            <button class="acc-card" (click)="zoomItem('assets/shower_accessories/shave_shelf.png', 'Shave Shelf')">
+              <img src="assets/shower_accessories/shave_shelf.png" alt="Shave Shelf" />
+              <span>Shave Shelf</span>
+            </button>
+            <button class="acc-card" (click)="zoomItem('assets/shower_accessories/corner_shelf.png', 'Corner Shelf')">
+              <img src="assets/shower_accessories/corner_shelf.png" alt="Corner Shelf" />
+              <span>Corner Shelf</span>
+            </button>
+            <button class="acc-card" (click)="zoomItem('assets/shower_accessories/shower_bench.png', 'Shower Bench')">
+              <img src="assets/shower_accessories/shower_bench.png" alt="Shower Bench" />
+              <span>Shower Bench</span>
+            </button>
+            <button class="acc-card" (click)="zoomItem('assets/shower_accessories/stainless_caddy.png', 'Stainless Steel Caddy')">
+              <img src="assets/shower_accessories/stainless_caddy.png" alt="Stainless Steel Caddy" />
+              <span>Stainless Caddy</span>
+            </button>
+            <button class="acc-card" (click)="zoomItem('assets/shower_accessories/recessed_caddy.png', 'Recessed Caddy 17×26')">
+              <img src="assets/shower_accessories/recessed_caddy.png" alt="Recessed Caddy 17×26" />
+              <span>Recessed Caddy 17×26</span>
+            </button>
+            <button class="acc-card" (click)="zoomItem('assets/shower_accessories/recessed_caddy_box.png', 'Recessed Caddy 17×17')">
+              <img src="assets/shower_accessories/recessed_caddy_box.png" alt="Recessed Caddy 17×17" />
+              <span>Recessed Caddy 17×17</span>
+            </button>
+            <button class="acc-card" (click)="zoomItem('assets/shower_accessories/corner_seat.png', 'Corner Seat')">
+              <img src="assets/shower_accessories/corner_seat.png" alt="Corner Seat" />
+              <span>Corner Seat</span>
+            </button>
+            <button class="acc-card" (click)="zoomItem('assets/shower_accessories/inside_corner_trim.png', 'Inside Corner Trim')">
+              <img src="assets/shower_accessories/inside_corner_trim.png" alt="Inside Corner Trim" />
+              <span>Inside Corner Trim</span>
+            </button>
+            <button class="acc-card" (click)="zoomItem('assets/shower_accessories/outside_corner_trim.png', 'Outside Corner Trim')">
+              <img src="assets/shower_accessories/outside_corner_trim.png" alt="Outside Corner Trim" />
+              <span>Outside Corner Trim</span>
+            </button>
+            <button class="acc-card" (click)="zoomItem('assets/shower_accessories/standard_trim.png', 'Standard Trim')">
+              <img src="assets/shower_accessories/standard_trim.png" alt="Standard Trim" />
+              <span>Standard Trim</span>
+            </button>
+            <button class="acc-card" (click)="zoomItem('assets/shower_accessories/remodel_trim.png', 'Remodel Trim')">
+              <img src="assets/shower_accessories/remodel_trim.png" alt="Remodel Trim" />
+              <span>Remodel Trim</span>
+            </button>
+            <button class="acc-card" (click)="zoomItem('assets/shower_accessories/window_trim.png', 'Window Trim')">
+              <img src="assets/shower_accessories/window_trim.png" alt="Window Trim" />
+              <span>Window Trim</span>
+            </button>
+          </div>
+          <div class="accessories-footer">
+            <button class="prod-quote-btn" (click)="openQuote()">Request a Free Quote</button>
+            <a routerLink="/products/shower-accessories" class="prod-website-link">View All on Website ›</a>
+          </div>
+        </div>
+      }
+
+      <!-- Colors & Trim sub-menu -->
+      @if (productView() === 'colors-menu') {
+        <div class="colors-menu-view">
+          <div class="view-heading">
+            <h2>Colors & Trim</h2>
+            <p>Choose your collection</p>
+          </div>
+          <div class="colors-menu-grid">
+            <button class="colors-menu-card" (click)="navToProduct('colors-stone')">
+              <img src="/assets/stone_colors/8_calacatta-white.png" alt="Stone Colors" />
+              <div class="cmc-body">
+                <h3>Stone Colors</h3>
+                <p>18 natural stone-inspired finishes</p>
+                <span>Tap to browse ›</span>
+              </div>
+            </button>
+            <button class="colors-menu-card" (click)="navToProduct('colors-simtile')">
+              <img src="/assets/simtile/5_calacatta_whitee_10x20_simtile.jpg" alt="SimTile" />
+              <div class="cmc-body">
+                <h3>SimTile</h3>
+                <p>The tile look without the grout — 10 options</p>
+                <span>Tap to browse ›</span>
+              </div>
+            </button>
+            <button class="colors-menu-card" (click)="navToProduct('colors-dimensions')">
+              <img src="/assets/dimension-simtile/10x20_Gray-1030x1030.jpg" alt="Dimensions SimTile" />
+              <div class="cmc-body">
+                <h3>Dimensions SimTile</h3>
+                <p>Large-format tile aesthetics — 4 options</p>
+                <span>Tap to browse ›</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      }
+
+      <!-- Stone Colors grid -->
+      @if (productView() === 'colors-stone') {
+        <div class="swatch-view">
+          <div class="view-heading">
+            <h2>Stone Colors</h2>
+            <p>Natural stone-inspired Sentrel wall panel finishes</p>
+          </div>
+          <div class="swatch-grid">
+            @for (item of stoneColors; track item.label) {
+              <button class="swatch-card" (click)="zoomItem(item.imageUrl, item.label)">
+                <img [src]="item.imageUrl" [alt]="item.label" loading="lazy" />
+                <span>{{ item.label }}</span>
+              </button>
+            }
+          </div>
+          <div class="swatch-footer">
+            <button class="prod-quote-btn" (click)="openQuote('colors')">Request a Free Quote</button>
+            <a routerLink="/products/colors-and-trim/stone-colors" class="prod-website-link">View on Website ›</a>
+          </div>
+        </div>
+      }
+
+      <!-- SimTile grid -->
+      @if (productView() === 'colors-simtile') {
+        <div class="swatch-view">
+          <div class="view-heading">
+            <h2>SimTile</h2>
+            <p>The realistic tile look — grout-free, low-maintenance</p>
+          </div>
+          <div class="swatch-grid">
+            @for (item of simtileItems; track item.label) {
+              <button class="swatch-card" (click)="zoomItem(item.imageUrl, item.label)">
+                <img [src]="item.imageUrl" [alt]="item.label" loading="lazy" />
+                <span>{{ item.label }}</span>
+              </button>
+            }
+          </div>
+          <div class="swatch-footer">
+            <button class="prod-quote-btn" (click)="openQuote('colors')">Request a Free Quote</button>
+            <a routerLink="/products/colors-and-trim/simtile" class="prod-website-link">View on Website ›</a>
+          </div>
+        </div>
+      }
+
+      <!-- Dimensions SimTile grid -->
+      @if (productView() === 'colors-dimensions') {
+        <div class="swatch-view">
+          <div class="view-heading">
+            <h2>Dimensions SimTile</h2>
+            <p>Large-format tile aesthetics with zero grout maintenance</p>
+          </div>
+          <div class="swatch-grid swatch-grid--wide">
+            @for (item of dimensionsItems; track item.label) {
+              <button class="swatch-card" (click)="zoomItem(item.imageUrl, item.label)">
+                <img [src]="item.imageUrl" [alt]="item.label" loading="lazy" />
+                <span>{{ item.label }}</span>
+              </button>
+            }
+          </div>
+          <div class="swatch-footer">
+            <button class="prod-quote-btn" (click)="openQuote('colors')">Request a Free Quote</button>
+            <a routerLink="/products/colors-and-trim/dimensions-simtile" class="prod-website-link">View on Website ›</a>
+          </div>
+        </div>
+      }
+    }
+
+    <!-- ── FORMS VIEW ── -->
+    @if (view() === 'forms') {
+      <div class="forms-view">
+        <div class="forms-section" id="kiosk-booking">
+          <div class="forms-section-header">
+            <h2>Request a Booking</h2>
+            <p>
+              Ready to transform your bathroom? Fill out the form below and our team will reach out
+              within 24 hours to schedule your free in-home or virtual consultation — no pressure, no obligation.
+            </p>
+          </div>
+          <div class="forms-card">
+            <app-booking-form />
+          </div>
+        </div>
+
+        <div class="forms-divider"></div>
+
+        <div class="forms-section" id="kiosk-design">
+          <div class="forms-section-header">
+            <h2>Design Request</h2>
+            <p>
+              Have a vision in mind? Tell us your preferences for wall design, tiles, bath, sink,
+              faucet, and more. Our designers will craft a bathroom concept tailored just for you.
+            </p>
+          </div>
+          <div class="forms-card forms-card--wide">
+            <app-design-request-form />
+          </div>
+        </div>
+      </div>
+    }
+
+  </div><!-- /kiosk-content -->
+
+</div><!-- /kiosk-wrap -->
+
+<!-- ===================== SPEED-DIAL FAB ===================== -->
+@if (!idleVisible() && !quoteOpen() && view() !== 'home') {
+  <!-- Backdrop sits outside fab-wrap to avoid stacking context issues -->
+  @if (fabOpen()) {
+    <div class="fab-backdrop" (click)="closeFab()"></div>
+  }
+
+  <div class="fab-wrap" [class.open]="fabOpen()">
+    <!-- Speed-dial options -->
+    <div class="fab-options">
+      <button class="fab-option" (click)="openQuote()">
+        <i class="fa-solid fa-bolt"></i>
+        <span>Quick Quote</span>
+      </button>
+      <button class="fab-option" (click)="openForm('booking')">
+        <i class="fa-regular fa-calendar-check"></i>
+        <span>Book a Consultation</span>
+      </button>
+      <button class="fab-option" (click)="openForm('design')">
+        <i class="fa-solid fa-pencil-ruler"></i>
+        <span>Design Request</span>
+      </button>
+    </div>
+
+    <!-- Main FAB toggle -->
+    <button class="sticky-quote" [class.active]="fabOpen()" (click)="toggleFab()">
+      <i class="fa-solid" [class.fa-comment-dots]="!fabOpen()" [class.fa-xmark]="fabOpen()"></i>
+      {{ fabOpen() ? 'Close' : 'Get Started' }}
+    </button>
+  </div>
+}
+
+<!-- ===================== QUOTE MODAL ===================== -->
+@if (quoteOpen()) {
+  <div class="quote-backdrop" (click)="closeQuote()">
+    <div class="quote-panel" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="closeQuote()" aria-label="Close">&#10005;</button>
+
+      @if (quoteStatus !== 'success') {
+        <div class="panel-head">
+          <h2>Request a Free Quote</h2>
+          <p>We'll call you to schedule a consultation — no pressure.</p>
+        </div>
+
+        <form class="kiosk-form" (ngSubmit)="onQuoteSubmit(f)" #f="ngForm">
+          <div class="kf-field">
+            <label class="kf-label">Your Name <span class="req">*</span></label>
+            <input type="text" class="kf-input" placeholder="First & Last Name"
+              [(ngModel)]="quoteForm.name" name="name" required autocomplete="off" />
+          </div>
+
+          <div class="kf-field">
+            <label class="kf-label">Phone Number <span class="req">*</span></label>
+            <input type="tel" class="kf-input" placeholder="(555) 000-0000"
+              [(ngModel)]="quoteForm.phone" name="phone" required autocomplete="off" />
+          </div>
+
+          <div class="kf-field">
+            <label class="kf-label">I'm interested in... <span class="req">*</span></label>
+            <div class="radio-group">
+              <label class="radio-opt">
+                <input type="radio" [(ngModel)]="quoteForm.interest" name="interest" value="walls" required />
+                <span>Shower Wall Systems</span>
+              </label>
+              <label class="radio-opt">
+                <input type="radio" [(ngModel)]="quoteForm.interest" name="interest" value="tub-to-shower" />
+                <span>Tub-to-Shower Conversion</span>
+              </label>
+              <label class="radio-opt">
+                <input type="radio" [(ngModel)]="quoteForm.interest" name="interest" value="floors" />
+                <span>Shower Floors & Bases</span>
+              </label>
+              <label class="radio-opt">
+                <input type="radio" [(ngModel)]="quoteForm.interest" name="interest" value="full-remodel" />
+                <span>Full Bathroom Remodel</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="kf-field">
+            <label class="kf-label">Budget Range</label>
+            <div class="radio-group radio-row">
+              <label class="radio-opt"><input type="radio" [(ngModel)]="quoteForm.budget" name="budget" value="Under $5K" /><span>Under $5K</span></label>
+              <label class="radio-opt"><input type="radio" [(ngModel)]="quoteForm.budget" name="budget" value="$5K–$10K" /><span>$5K–$10K</span></label>
+              <label class="radio-opt"><input type="radio" [(ngModel)]="quoteForm.budget" name="budget" value="$10K–$20K" /><span>$10K–$20K</span></label>
+              <label class="radio-opt"><input type="radio" [(ngModel)]="quoteForm.budget" name="budget" value="$20K+" /><span>$20K+</span></label>
+            </div>
+          </div>
+
+          <div class="kf-field">
+            <label class="kf-label">When are you thinking?</label>
+            <div class="radio-group radio-row">
+              <label class="radio-opt"><input type="radio" [(ngModel)]="quoteForm.timeline" name="timeline" value="Ready Now" /><span>Ready Now</span></label>
+              <label class="radio-opt"><input type="radio" [(ngModel)]="quoteForm.timeline" name="timeline" value="1–3 Months" /><span>1–3 Months</span></label>
+              <label class="radio-opt"><input type="radio" [(ngModel)]="quoteForm.timeline" name="timeline" value="3–6 Months" /><span>3–6 Months</span></label>
+              <label class="radio-opt"><input type="radio" [(ngModel)]="quoteForm.timeline" name="timeline" value="Just Browsing" /><span>Just Browsing</span></label>
+            </div>
+          </div>
+
+          @if (quoteStatus === 'error') {
+            <p class="form-msg error">Something went wrong. Please try again or ask a team member.</p>
+          }
+
+          <button type="submit" class="submit-btn" [disabled]="quoteStatus === 'loading' || f.invalid">
+            {{ quoteStatus === 'loading' ? 'Sending...' : 'Send My Request' }}
+          </button>
+        </form>
+      }
+
+      @if (quoteStatus === 'success') {
+        <div class="success-state">
+          <div class="success-icon">&#10003;</div>
+          <h2>We've Got You!</h2>
+          <p>Expect a call from our team soon.<br>Thank you for visiting New Bath Expo!</p>
+        </div>
+      }
+    </div>
+  </div>
+}
+
+<!-- ===================== ITEM ZOOM OVERLAY ===================== -->
+@if (zoomedItem()) {
+  <div class="item-zoom-backdrop" (click)="closeZoom()">
+    <div class="item-zoom-panel" (click)="$event.stopPropagation()">
+      <button class="item-zoom-close" (click)="closeZoom()" aria-label="Close">&#10005;</button>
+      <div class="item-zoom-img-wrap">
+        <img [src]="zoomedItem()!.imageUrl" [alt]="zoomedItem()!.label" />
+      </div>
+      <div class="item-zoom-label">{{ zoomedItem()!.label }}</div>
+    </div>
+  </div>
+}

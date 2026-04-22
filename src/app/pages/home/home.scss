@@ -242,3 +242,33 @@ h1 {
   }
 }
 
+/* ===== Showroom kiosk FAB ===== */
+
+.showroom-fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: var(--color-dark);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 100px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-family: 'Nunito Sans', sans-serif;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  opacity: 0.85;
+
+  &:hover {
+    background: var(--accent);
+    opacity: 1;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(11, 19, 140, 0.35);
+  }
+}
+

@@ -1,0 +1,84 @@
+<app-page-hero
+  bgImage="/assets/shower_colors/White-Pearl-Royale-96-10x20-SimTile-edit.png"
+  eyebrow="Colors & Trim"
+  title="SimTile"
+  subtitle="The timeless look of tile — without the grout, the cracks, or the upkeep.">
+</app-page-hero>
+
+<!-- Back link -->
+<div class="cat-back-wrap">
+  <div class="cat-inner">
+    <a routerLink="/products/colors-and-trim" class="btn-back">
+      <span>&larr;</span> Back to Colors &amp; Trim
+    </a>
+  </div>
+</div>
+
+<!-- Section 2: Gallery -->
+<section class="simtile-gallery-section">
+  <div class="cat-inner">
+    <div class="gallery-header">
+      <h2>Five Thoughtfully Crafted Designs Available in Two Timeless Tile Patterns</h2>
+      <p>
+        We've meticulously chosen our most captivating and design-forward stone colors, pairing them with the two most
+        sought-after tile patterns to create an exquisite selection of simulated tile options that elevate any bathroom design.
+      </p>
+    </div>
+
+    <app-product-gallery [items]="simtileItems" [columns]="5"></app-product-gallery>
+  </div>
+</section>
+
+<!-- Section 3: Benefits -->
+<section class="benefits-section">
+  <div class="cat-inner">
+    <div class="benefits-layout">
+      <div class="benefits-content">
+        <h2>Discover the Benefits of Our Shower Tile Alternatives</h2>
+        <ul class="benefits-list">
+          <li>
+            <div class="benefit-number">1</div>
+            <div class="benefit-text">
+              <strong>Easy Maintenance</strong>
+              <p>No grout to scrub, no mold to fight. A quick wipe-down keeps SimTile panels looking brand new year after year.</p>
+            </div>
+          </li>
+          <li>
+            <div class="benefit-number">2</div>
+            <div class="benefit-text">
+              <strong>An Elevated Aesthetic</strong>
+              <p>Precise, realistic tile patterns bring a refined, high-end look to any bathroom without the complexity of traditional tile work.</p>
+            </div>
+          </li>
+          <li>
+            <div class="benefit-number">3</div>
+            <div class="benefit-text">
+              <strong>Quick Installation</strong>
+              <p>SimTile panels install significantly faster than traditional tile, minimizing disruption to your daily routine.</p>
+            </div>
+          </li>
+          <li>
+            <div class="benefit-number">4</div>
+            <div class="benefit-text">
+              <strong>Durable and Long-Lasting</strong>
+              <p>Engineered from high-quality composite materials, these panels are built to withstand daily use for decades.</p>
+            </div>
+          </li>
+          <li>
+            <div class="benefit-number">5</div>
+            <div class="benefit-text">
+              <strong>Hygienic</strong>
+              <p>Grout-free surfaces eliminate hidden bacteria and mold growth, keeping your shower cleaner and healthier for your family.</p>
+            </div>
+          </li>
+        </ul>
+        <a routerLink="/bookings" class="btn-primary">Book a Consultation</a>
+      </div>
+      <div class="benefits-image">
+        <img src="/assets/baths/18.jpg" alt="New Bath Expo SimTile Shower" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-gallery-callout></app-gallery-callout>
