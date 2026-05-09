@@ -21,6 +21,9 @@
         </div>
         <div class="label-overlay">
           <h3>{{ item.label }}</h3>
+          @if (item.colorLabel) {
+            <span class="color-label">{{ item.colorLabel }}</span>
+          }
         </div>
       </div>
       }
@@ -66,9 +69,10 @@
         space.</p>
     </div>
     <div class="intro-action">
-      <a routerLink="/bookings" class="btn-primary">Accessorize my Shower</a>
+      <a routerLink="/design-request" class="btn-primary">Accessorize my Shower</a>
     </div>
   </div>
 </section>
 
+<app-faq page="shower_accessories"/>
 <app-gallery-callout></app-gallery-callout>

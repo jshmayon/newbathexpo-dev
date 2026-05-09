@@ -2,14 +2,53 @@
   bgImage="/assets/baths/1.jpg"
   eyebrow="Inspiration"
   title="Design Gallery"
-  subtitle="Browse our curated collection of stunning bathroom designs — each crafted with precision and care.">
+  subtitle="Browse our curated collection of stunning bathroom designs each crafted with precision and care.">
 </app-page-hero>
 
 <!-- Gallery Grid -->
 <section class="gallery-section" (keydown)="onKeydown($event)" tabindex="0">
   <div class="gallery-inner">
+
+    <!-- Preference Filters -->
+    <div class="gallery-filters">
+      <div class="filter-group">
+        <span class="filter-label">Wall Design</span>
+        <div class="filter-chips" role="group" aria-label="Filter by wall system">
+          @for (ws of wallSystems; track ws) {
+            <button
+              class="filter-chip"
+              [class.active]="selectedWallSystem() === ws"
+              (click)="setWallSystem(ws)"
+              [attr.aria-pressed]="selectedWallSystem() === ws"
+            >{{ ws }}</button>
+          }
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <span class="filter-label">Style</span>
+        <div class="filter-chips" role="group" aria-label="Filter by style">
+          @for (st of styles; track st) {
+            <button
+              class="filter-chip"
+              [class.active]="selectedStyle() === st"
+              (click)="setStyle(st)"
+              [attr.aria-pressed]="selectedStyle() === st"
+            >{{ st }}</button>
+          }
+        </div>
+      </div>
+
+      @if (selectedWallSystem() !== 'All' || selectedStyle() !== 'All') {
+        <div class="filter-results">
+          <span>{{ filteredItems().length }} design{{ filteredItems().length !== 1 ? 's' : '' }} found</span>
+          <button class="filter-clear" (click)="setWallSystem('All'); setStyle('All')">Clear filters</button>
+        </div>
+      }
+    </div>
+
     <div class="gallery-grid">
-      @for (img of galleryService.items; track img.src; let i = $index) {
+      @for (img of filteredItems(); track img.src; let i = $index) {
         <div
           class="gallery-item"
           [class.loaded]="loaded()[i]"
@@ -51,7 +90,7 @@
       <div class="build-own-inner">
         <div class="build-own-text">
           <h3>Want to build your own?</h3>
-          <p>Tell us your preferences — wall design, tiles, bath, sink, faucet and more. We'll craft a bathroom concept tailored just for you.</p>
+          <p>Tell us your preferences wall design, tiles, bath, sink, faucet and more. We'll craft a bathroom concept tailored just for you.</p>
         </div>
         <a routerLink="/design-request" class="btn-design">Start Your Design Request</a>
       </div>
@@ -75,19 +114,38 @@
       <i class="fa-solid fa-chevron-left"></i>
     </button>
 
-    <div class="lightbox-content" [class.full]="lightboxFull()" (click)="$event.stopPropagation()">
-      <!-- Image — click to toggle full view -->
-      <div class="lightbox-image-wrap" (click)="toggleFull($event)" [title]="lightboxFull() ? 'Click to show specs' : 'Click to view full image'">
-        <img [src]="lightboxItem().src" [alt]="lightboxItem().alt" />
-        <span class="zoom-hint">
-          <i class="fa-solid" [class.fa-expand]="!lightboxFull()" [class.fa-compress]="lightboxFull()"></i>
-          {{ lightboxFull() ? 'Show Specs' : 'Full View' }}
-        </span>
+    <div class="lightbox-content" (click)="$event.stopPropagation()">
+      <!-- Image wrap — drag to pan when zoomed -->
+      <div class="lightbox-image-wrap"
+           [class.zoomed]="zoomScale() > 1"
+           [class.dragging]="isDragging()"
+           (mousedown)="onDragStart($event)"
+           (mousemove)="onDragMove($event)"
+           (mouseup)="onDragEnd()"
+           (mouseleave)="onDragEnd()"
+           (touchstart)="onDragStart($event)"
+           (touchmove)="onDragMove($event)"
+           (touchend)="onDragEnd()">
+        <img [src]="lightboxItem().src" [alt]="lightboxItem().alt"
+             [style.transform]="'translate(' + panX() + 'px, ' + panY() + 'px) scale(' + zoomScale() + ')'"
+             [style.transition]="isDragging() ? 'none' : 'transform 0.2s ease'" />
+
+        <!-- Zoom controls -->
+        <div class="zoom-controls" (mousedown)="$event.stopPropagation()" (touchstart)="$event.stopPropagation()">
+          <button (click)="zoomOut()" [disabled]="zoomScale() <= 1" aria-label="Zoom out">
+            <i class="fa-solid fa-magnifying-glass-minus"></i>
+          </button>
+          <button (click)="resetZoom()" [disabled]="zoomScale() === 1 && panX() === 0 && panY() === 0" aria-label="Reset zoom">
+            <i class="fa-solid fa-arrows-to-circle"></i>
+          </button>
+          <button (click)="zoomIn()" [disabled]="zoomScale() >= 4" aria-label="Zoom in">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          </button>
+        </div>
       </div>
 
-      <!-- Specs panel — hidden in full mode -->
-      @if (!lightboxFull()) {
-        <div class="specs-panel">
+      <!-- Specs panel -->
+      <div class="specs-panel">
           <h3 class="specs-title">{{ lightboxItem().title }}</h3>
           <span class="style-badge">{{ lightboxItem().style }}</span>
 
@@ -117,10 +175,9 @@
           </a>
 
           <div class="lightbox-counter-inline">
-            {{ lightboxIndex() + 1 }} / {{ galleryService.items.length }}
+            {{ lightboxIndex() + 1 }} / {{ filteredItems().length }}
           </div>
         </div>
-      }
     </div>
 
     <button class="lightbox-nav lightbox-next" (click)="nextImage($event)" aria-label="Next image">

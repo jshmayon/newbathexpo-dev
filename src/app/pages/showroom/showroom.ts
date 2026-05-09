@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, signal, computed, PLATFORM_ID, Inject, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { SeoService } from '../../service/seo.service';
@@ -20,16 +20,33 @@ interface ColorSwatch {
   selector: 'app-showroom',
   imports: [RouterLink, FormsModule, BookingForm, DesignRequestForm],
   templateUrl: './showroom.html',
-  styleUrl: './showroom.scss',
+  styleUrls: [
+    './showroom.scss',
+    './showroom-kiosk.scss',
+    './showroom-gallery.scss',
+    './showroom-products.scss',
+    './showroom-forms.scss',
+    './showroom-quote.scss',
+    './showroom-zoom.scss',
+    './showroom-responsive.scss',
+  ],
 })
 export class Showroom implements OnInit, OnDestroy {
   readonly gallery = inject(GalleryService);
+  private readonly router = inject(Router);
+  private readonly route  = inject(ActivatedRoute);
 
   idleVisible = signal(true);
   view = signal<KioskView>('home');
   productView = signal<ProductView>('menu');
   gallerySelected = signal<GalleryItem | null>(null);
   zoomedItem = signal<{ imageUrl: string; label: string } | null>(null);
+
+  galleryZoom = signal(1);
+  galleryPanX = signal(0);
+  galleryPanY = signal(0);
+  isGalleryDragging = signal(false);
+  private _galleryDragStart: { x: number; y: number; px: number; py: number } | null = null;
   quoteOpen = signal(false);
   fabOpen = signal(false);
 
@@ -123,6 +140,20 @@ export class Showroom implements OnInit, OnDestroy {
       ['touchstart', 'mousemove', 'click', 'keydown', 'scroll'].forEach((evt) => {
         document.addEventListener(evt, this.activityHandler, { passive: true });
       });
+
+      const viewParam = this.route.snapshot.queryParamMap.get('view');
+      if (viewParam) {
+        const title = viewParam.replace(/_/g, ' ');
+        const item = this.gallery.items.find(
+          (g) => g.title.toLowerCase() === title.toLowerCase()
+        );
+        if (item) {
+          this.idleVisible.set(false);
+          this.view.set('gallery');
+          this.gallerySelected.set(item);
+          this.resetIdleTimer();
+        }
+      }
     }
   }
 
@@ -155,6 +186,10 @@ export class Showroom implements OnInit, OnDestroy {
     const pv = this.productView();
     switch (this.view()) {
       case 'gallery':
+        this.gallerySelected.set(null);
+        this.router.navigate(['/showroom'], { replaceUrl: true });
+        this.view.set('home');
+        break;
       case 'forms':
         this.view.set('home');
         break;
@@ -172,10 +207,55 @@ export class Showroom implements OnInit, OnDestroy {
 
   selectGalleryImage(item: GalleryItem) {
     this.gallerySelected.set(item);
+    this.resetGalleryZoom();
+    this.router.navigate(['/showroom'], {
+      queryParams: { view: item.title.replace(/ /g, '_').toLowerCase() },
+      replaceUrl: true,
+    });
   }
 
   closeGalleryDetail() {
     this.gallerySelected.set(null);
+    this.resetGalleryZoom();
+    this.router.navigate(['/showroom'], { replaceUrl: true });
+  }
+
+  galleryZoomIn() { this.galleryZoom.update(s => Math.min(s + 0.5, 4)); }
+
+  galleryZoomOut() {
+    this.galleryZoom.update(s => {
+      const n = Math.max(s - 0.5, 1);
+      if (n === 1) { this.galleryPanX.set(0); this.galleryPanY.set(0); }
+      return n;
+    });
+  }
+
+  resetGalleryZoom() {
+    this.galleryZoom.set(1);
+    this.galleryPanX.set(0);
+    this.galleryPanY.set(0);
+    this.isGalleryDragging.set(false);
+    this._galleryDragStart = null;
+  }
+
+  onGalleryDragStart(e: MouseEvent | TouchEvent) {
+    e.stopPropagation();
+    if (this.galleryZoom() <= 1) return;
+    const point = e instanceof TouchEvent ? e.touches[0] : e;
+    this._galleryDragStart = { x: point.clientX, y: point.clientY, px: this.galleryPanX(), py: this.galleryPanY() };
+    this.isGalleryDragging.set(true);
+  }
+
+  onGalleryDragMove(e: MouseEvent | TouchEvent) {
+    if (!this._galleryDragStart) return;
+    const point = e instanceof TouchEvent ? e.touches[0] : e;
+    this.galleryPanX.set(this._galleryDragStart.px + (point.clientX - this._galleryDragStart.x));
+    this.galleryPanY.set(this._galleryDragStart.py + (point.clientY - this._galleryDragStart.y));
+  }
+
+  onGalleryDragEnd() {
+    this._galleryDragStart = null;
+    this.isGalleryDragging.set(false);
   }
 
   zoomItem(imageUrl: string, label: string) {
@@ -221,11 +301,13 @@ export class Showroom implements OnInit, OnDestroy {
     this.view.set('home');
     this.productView.set('menu');
     this.gallerySelected.set(null);
+    this.resetGalleryZoom();
     this.quoteOpen.set(false);
     this.fabOpen.set(false);
     this.quoteStatus = 'idle';
     if (this.idleTimer) clearTimeout(this.idleTimer);
     this.idleTimer = null;
+    this.router.navigate(['/showroom'], { replaceUrl: true });
   }
 
   private resetIdleTimer() {
@@ -237,6 +319,7 @@ export class Showroom implements OnInit, OnDestroy {
       this.productView.set('menu');
       this.gallerySelected.set(null);
       this.quoteOpen.set(false);
+      this.router.navigate(['/showroom'], { replaceUrl: true });
     }, this.IDLE_MS);
   }
 

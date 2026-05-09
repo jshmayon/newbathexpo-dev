@@ -4,10 +4,11 @@ import { RouterLink } from '@angular/router';
 import { PageHero } from '../../../shared/page-hero/page-hero';
 import { GalleryCallout } from '../../../shared/gallery-callout/gallery-callout';
 import { SeoService } from '../../../service/seo.service';
+import { Faq } from "../../../shared/faq/faq";
 
 @Component({
   selector: 'app-shower-floors-and-bases',
-  imports: [RouterLink, PageHero, GalleryCallout],
+  imports: [RouterLink, PageHero, GalleryCallout, Faq],
   templateUrl: './shower-floors-and-bases.html',
   styleUrl: './shower-floors-and-bases.scss',
 })
@@ -19,9 +20,9 @@ export class ShowerFloorsAndBases {
     inject(SeoService).set({
       title: 'Shower Floors & Bases',
       description:
-        'Complete your shower with precision-engineered Sentrel bases — zero-threshold, modular, custom, and standard options designed to pair seamlessly with our wall systems. Monterey Peninsula.',
+        'Complete your shower with precision-engineered New Bath Expo bases — zero-threshold, modular, custom, and standard options designed to pair seamlessly with our wall systems. Monterey Peninsula.',
       keywords:
-        'shower base, shower floor, zero threshold shower, custom shower base, shower remodel monterey, sentrel shower base, accessible shower',
+        'shower base, shower floor, zero threshold shower, custom shower base, shower remodel monterey, New Bath Expo shower base, accessible shower',
       canonical: '/products/shower-floors-and-bases',
       ogImage: 'https://www.newbathexpo.com/assets/baths/8.jpg',
     });

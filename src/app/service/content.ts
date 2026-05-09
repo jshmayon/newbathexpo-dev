@@ -9,6 +9,7 @@ export interface Accessory {
   id: string;
   label: string;
   imageUrl: string;
+  colorLabel?: string;
 }
 
 export interface ProcessStep {
@@ -150,22 +151,22 @@ export class ContentService {
   ];
 
   accessories: Accessory[] = [
-    { id: '12', label: 'Shave Shelf', imageUrl: 'assets/shower_accessories/shave_shelf.png' },
-    { id: '6', label: 'Corner Shelf', imageUrl: 'assets/shower_accessories/corner_shelf.png' },
-    { id: '13', label: 'Shower Bench', imageUrl: 'assets/shower_accessories/shower_bench.png' },
-    { id: '14', label: 'Stainless Steel Caddy', imageUrl: 'assets/shower_accessories/stainless_caddy.png' },
-    { id: '2', label: '3" Seam Strip', imageUrl: 'assets/shower_accessories/3inch_seam_strip.png' },
-    { id: '7', label: 'Inside Corner Trim', imageUrl: 'assets/shower_accessories/inside_corner_trim.png' },
-    { id: '3', label: '6" Standard Trim', imageUrl: 'assets/shower_accessories/6_inch_standard_trim.png' },
-    { id: '15', label: 'Standard Trim', imageUrl: 'assets/shower_accessories/standard_trim.png' },
-    { id: '11', label: 'Remodel Trim', imageUrl: 'assets/shower_accessories/remodel_trim.png' },
-    { id: '4', label: '6" Trim w/ 2" Lip', imageUrl: 'assets/shower_accessories/6nc_trim_w2lip.png' },
-    { id: '16', label: 'Window Trim', imageUrl: 'assets/shower_accessories/window_trim.png' },
-    { id: '8', label: '1.5" Outside Corner Trim', imageUrl: 'assets/shower_accessories/outside_corner_trim.png' },
-    { id: '1', label: '3" Outside Corner Trim', imageUrl: 'assets/shower_accessories/3inch_outside_corner_trim.png' },
-    { id: '9', label: 'Recessed Caddy 17x26', imageUrl: 'assets/shower_accessories/recessed_caddy.png' },
-    { id: '10', label: 'Recessed Caddy 17x17', imageUrl: 'assets/shower_accessories/recessed_caddy_box.png' },
-    { id: '5', label: 'Corner Seat', imageUrl: 'assets/shower_accessories/corner_seat.png' },
+    { id: '12', label: 'Shave Shelf', imageUrl: 'assets/shower_accessories/shave_shelf.png', colorLabel: 'White Pearl' },
+    { id: '6', label: 'Corner Shelf', imageUrl: 'assets/shower_accessories/corner_shelf.png', colorLabel: 'Bardiglio' },
+    { id: '13', label: 'Shower Bench', imageUrl: 'assets/shower_accessories/shower_bench.png', colorLabel: 'White Calacatta' },
+    { id: '14', label: 'Stainless Steel Caddy', imageUrl: 'assets/shower_accessories/stainless_caddy.png', colorLabel: 'Choice of Color — can be installed inside Caddy' },
+    // { id: '2', label: '3" Seam Strip', imageUrl: 'assets/shower_accessories/3inch_seam_strip.png' },
+    // { id: '7', label: 'Inside Corner Trim', imageUrl: 'assets/shower_accessories/inside_corner_trim.png' },
+    // { id: '3', label: '6" Standard Trim', imageUrl: 'assets/shower_accessories/6_inch_standard_trim.png' },
+    // { id: '15', label: 'Standard Trim', imageUrl: 'assets/shower_accessories/standard_trim.png' },
+    // { id: '11', label: 'Remodel Trim', imageUrl: 'assets/shower_accessories/remodel_trim.png' },
+    // { id: '4', label: '6" Trim w/ 2" Lip', imageUrl: 'assets/shower_accessories/6nc_trim_w2lip.png' },
+    // { id: '16', label: 'Window Trim', imageUrl: 'assets/shower_accessories/window_trim.png' },
+    // { id: '8', label: '1.5" Outside Corner Trim', imageUrl: 'assets/shower_accessories/outside_corner_trim.png' },
+    // { id: '1', label: '3" Outside Corner Trim', imageUrl: 'assets/shower_accessories/3inch_outside_corner_trim.png' },
+    { id: '9', label: 'Recessed Caddy 17x26', imageUrl: 'assets/shower_accessories/recessed_caddy.png', colorLabel: 'Veincut Gray' },
+    { id: '10', label: 'Recessed Caddy 17x17', imageUrl: 'assets/shower_accessories/recessed_caddy_box.png', colorLabel: 'White Pearl' },
+    { id: '5', label: 'Corner Seat', imageUrl: 'assets/shower_accessories/corner_seat.png', colorLabel: 'Alaskan Ivory' },
     { id: '17', label: 'Window Trim Kit', imageUrl: 'assets/shower_accessories/window_trim_kit.png' }
   ];
 }

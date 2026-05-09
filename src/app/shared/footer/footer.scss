@@ -32,6 +32,24 @@
     line-height: 1.7;
     color: var(--color-muted);
   }
+
+  .footer-made-in-usa {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+    font-size: var(--text-sm);
+    color: var(--color-subtle);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    padding: 0.25rem 0.6rem;
+
+    strong {
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+  }
 }
 
 .footer-contact, .footer-social {
@@ -109,6 +127,18 @@
   padding: 1.25rem 3rem;
   color: var(--color-muted);
   font-size: var(--text-sm);
+}
+
+@media (max-width: 900px) {
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 3.5rem 2rem;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 768px) {

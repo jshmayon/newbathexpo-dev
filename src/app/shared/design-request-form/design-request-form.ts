@@ -46,11 +46,10 @@ export class DesignRequestForm {
       sink: this.resolve(this.form.sink, this.form.sinkOther),
       faucet: this.resolve(this.form.faucet, this.form.faucetOther),
       shower: this.resolve(this.form.shower, this.form.showerOther),
-      notes: this.form.notes,
-      type: 'design-request'
+      notes: this.form.notes
     };
 
-    this.http.post('/api/v1/contact', payload).subscribe({
+    this.http.post('/api/v1/design-request', payload).subscribe({
       next: () => {
         this.status = 'success';
         formRef.resetForm();

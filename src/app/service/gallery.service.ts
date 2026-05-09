@@ -14,16 +14,16 @@ export interface GalleryItem {
 @Injectable({ providedIn: 'root' })
 export class GalleryService {
   readonly items: GalleryItem[] = [
-    {
-      src: 'assets/baths/1.jpg',
-      alt: 'Marble Luxe Walk-in Shower',
-      title: 'Marble Luxe Walk-in',
-      style: 'Contemporary',
-      wallSystem: 'Sentrel Stone Series',
-      tile: 'Large Format Porcelain',
-      finish: 'Calacatta White',
-      features: ['Walk-in Shower', 'Rainfall Showerhead', 'Frameless Glass Door', 'Built-in Niche'],
-    },
+    // {
+    //   src: 'assets/baths/1.jpg',
+    //   alt: 'Marble Luxe Walk-in Shower',
+    //   title: 'Marble Luxe Walk-in',
+    //   style: 'Contemporary',
+    //   wallSystem: 'Sentrel Stone Series',
+    //   tile: 'Large Format Porcelain',
+    //   finish: 'Calacatta White',
+    //   features: ['Walk-in Shower', 'Rainfall Showerhead', 'Frameless Glass Door', 'Built-in Niche'],
+    // },
     {
       src: 'assets/baths/2.jpg',
       alt: 'Coastal Grey Escape Shower',
@@ -174,16 +174,16 @@ export class GalleryService {
       finish: 'Calacatta White',
       features: ['Walk-in Shower', 'Rainfall + Body Jets', 'Frameless Glass', 'Heated Floor'],
     },
-    {
-      src: 'assets/baths/18.jpg',
-      alt: 'Coastal Blue Haven Shower',
-      title: 'Coastal Blue Haven',
-      style: 'Contemporary',
-      wallSystem: 'SimTile',
-      tile: 'Pebble Floor Accent',
-      finish: 'Azzurra Bay',
-      features: ['Walk-in Shower', 'Pebble Floor', 'Brushed Nickel', 'Coastal Accents'],
-    },
+    // {
+    //   src: 'assets/baths/18.jpg',
+    //   alt: 'Coastal Blue Haven Shower',
+    //   title: 'Coastal Blue Haven',
+    //   style: 'Contemporary',
+    //   wallSystem: 'SimTile',
+    //   tile: 'Pebble Floor Accent',
+    //   finish: 'Azzurra Bay',
+    //   features: ['Walk-in Shower', 'Pebble Floor', 'Brushed Nickel', 'Coastal Accents'],
+    // },
     {
       src: 'assets/baths/20.jpg',
       alt: 'Industrial Modern Shower',

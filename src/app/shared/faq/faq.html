@@ -1,0 +1,41 @@
+@if (faqData) {
+  <section class="faq-section">
+    <div class="faq-inner">
+
+      <div class="faq-image">
+        <img [src]="faqData.image" [alt]="'FAQ — ' + faqData.name" loading="lazy" />
+      </div>
+
+      <div class="faq-content">
+        <p class="faq-eyebrow">Have Questions?</p>
+        <h2 class="faq-heading">Frequently Asked Questions About Our {{ faqData.name }}</h2>
+
+        <ul class="faq-list" role="list">
+          @for (item of faqData.items; track item.question; let i = $index) {
+            <li class="faq-item" [class.open]="openIndex() === i">
+              <button
+                class="faq-question"
+                (click)="toggle(i)"
+                [attr.aria-expanded]="openIndex() === i"
+                [attr.aria-controls]="'faq-answer-' + i"
+              >
+                <span>{{ item.question }}</span>
+                <span class="faq-chevron" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"/>
+                  </svg>
+                </span>
+              </button>
+              @if (openIndex() === i) {
+                <div class="faq-answer" [id]="'faq-answer-' + i" role="region">
+                  <p>{{ item.answer || 'Answer coming soon.' }}</p>
+                </div>
+              }
+            </li>
+          }
+        </ul>
+      </div>
+
+    </div>
+  </section>
+}

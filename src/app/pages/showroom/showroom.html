@@ -1,3 +1,13 @@
+<!-- ===================== MOBILE WARNING ===================== -->
+<div class="mobile-warning">
+  <div class="mobile-warning-card">
+    <i class="fa-solid fa-display mobile-warning-icon"></i>
+    <h2>Showroom Kiosk</h2>
+    <p>This experience is designed for tablets and larger screens. Please visit on a bigger device to explore the showroom.</p>
+    <a href="/" class="mobile-warning-btn">Go Back to Website</a>
+  </div>
+</div>
+
 <!-- ===================== IDLE OVERLAY ===================== -->
 <div class="idle-overlay" [class.visible]="idleVisible()">
   <img src="assets/baths/17.jpg" alt="Luxurious bathroom" class="idle-bg" />
@@ -5,7 +15,7 @@
   <div class="idle-content">
     <img src="assets/logo-text.png" alt="New Bath Expo" class="idle-logo" />
     <h1 class="idle-headline">Beautiful Bathrooms<br>Start Here</h1>
-    <p class="idle-sub">Premium Sentrel shower systems — designed for your home</p>
+    <p class="idle-sub">Premium New Bath Expo shower systems — designed for your home</p>
     <button class="tap-btn" (click)="tapToExplore()">
       <span class="tap-pulse"></span>
       Tap to Explore
@@ -122,7 +132,31 @@
           <div class="gallery-detail-panel" (click)="$event.stopPropagation()">
             <button class="detail-close" (click)="closeGalleryDetail()">&#10005;</button>
             <div class="detail-image-wrap">
-              <img [src]="selected.src" [alt]="selected.alt" />
+              <div class="detail-img-zoom-wrap"
+                   [class.zoomed]="galleryZoom() > 1"
+                   [class.dragging]="isGalleryDragging()"
+                   (mousedown)="onGalleryDragStart($event)"
+                   (mousemove)="onGalleryDragMove($event)"
+                   (mouseup)="onGalleryDragEnd()"
+                   (mouseleave)="onGalleryDragEnd()"
+                   (touchstart)="onGalleryDragStart($event)"
+                   (touchmove)="onGalleryDragMove($event)"
+                   (touchend)="onGalleryDragEnd()">
+                <img [src]="selected.src" [alt]="selected.alt"
+                     [style.transform]="'translate(' + galleryPanX() + 'px, ' + galleryPanY() + 'px) scale(' + galleryZoom() + ')'"
+                     [style.transition]="isGalleryDragging() ? 'none' : 'transform 0.2s ease'" />
+              </div>
+              <div class="detail-zoom-controls" (mousedown)="$event.stopPropagation()" (touchstart)="$event.stopPropagation()">
+                <button (click)="galleryZoomOut()" [disabled]="galleryZoom() <= 1" aria-label="Zoom out">
+                  <i class="fa-solid fa-magnifying-glass-minus"></i>
+                </button>
+                <button (click)="resetGalleryZoom()" [disabled]="galleryZoom() === 1 && galleryPanX() === 0 && galleryPanY() === 0" aria-label="Reset zoom">
+                  <i class="fa-solid fa-arrows-to-circle"></i>
+                </button>
+                <button (click)="galleryZoomIn()" [disabled]="galleryZoom() >= 4" aria-label="Zoom in">
+                  <i class="fa-solid fa-magnifying-glass-plus"></i>
+                </button>
+              </div>
             </div>
             <div class="detail-specs">
               <h2>{{ selected.title }}</h2>
@@ -214,12 +248,12 @@
             <div class="prod-detail-info">
               <h2>Shower Wall Systems</h2>
               <p class="prod-detail-desc">
-                Sentrel shower wall panels install directly over existing tile or drywall — no demo required.
+                New Bath Expo shower wall panels install directly over existing tile or drywall, no demo required.
                 Waterproof, grout-free, and available in dozens of beautiful textures and colors.
                 Transform your shower in as little as one day.
               </p>
               <ul class="prod-features">
-                <li>100% waterproof — no grout lines to clean</li>
+                <li>100% waterproof, no grout lines to clean</li>
                 <li>Installs over existing surfaces — no demolition</li>
                 <li>Available in 20+ stone colors and tile patterns</li>
                 <li>Backed by a lifetime warranty</li>
@@ -242,7 +276,7 @@
               <h2>Shower Floors & Bases</h2>
               <p class="prod-detail-desc">
                 Our shower bases are engineered for safety and style. Slip-resistant texture,
-                low-profile design, and a perfect match to Sentrel wall systems.
+                low-profile design, and a perfect match to New Bath Expo wall systems.
                 Available in multiple sizes and colors.
               </p>
               <ul class="prod-features">
@@ -282,7 +316,7 @@
             </button>
             <button class="acc-card" (click)="zoomItem('assets/shower_accessories/stainless_caddy.png', 'Stainless Steel Caddy')">
               <img src="assets/shower_accessories/stainless_caddy.png" alt="Stainless Steel Caddy" />
-              <span>Stainless Caddy</span>
+              <span>Stainless Steel Caddy</span>
             </button>
             <button class="acc-card" (click)="zoomItem('assets/shower_accessories/recessed_caddy.png', 'Recessed Caddy 17×26')">
               <img src="assets/shower_accessories/recessed_caddy.png" alt="Recessed Caddy 17×26" />
@@ -365,7 +399,7 @@
         <div class="swatch-view">
           <div class="view-heading">
             <h2>Stone Colors</h2>
-            <p>Natural stone-inspired Sentrel wall panel finishes</p>
+            <p>Natural stone-inspired New Bath Expo wall panel finishes</p>
           </div>
           <div class="swatch-grid">
             @for (item of stoneColors; track item.label) {

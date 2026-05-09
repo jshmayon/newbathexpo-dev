@@ -151,8 +151,18 @@
     h3 {
       margin: 0;
       font-size: 1.1rem;
-      font-weight: 500; /* reduced font weight */
+      font-weight: 500;
       color: var(--color-text);
+    }
+
+    .color-label {
+      display: block;
+      margin-top: 0.2rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+      line-height: 1.35;
     }
   }
 }

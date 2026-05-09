@@ -4,10 +4,11 @@ import { PageHero } from '../../../shared/page-hero/page-hero';
 import { GalleryCallout } from '../../../shared/gallery-callout/gallery-callout';
 import { ContentService, Accessory } from '../../../service/content';
 import { SeoService } from '../../../service/seo.service';
+import { Faq } from "../../../shared/faq/faq";
 
 @Component({
   selector: 'app-shower-accessories',
-  imports: [RouterLink, PageHero, GalleryCallout],
+  imports: [RouterLink, PageHero, GalleryCallout, Faq],
   templateUrl: './shower-accessories.html',
   styleUrl: './shower-accessories.scss',
 })
