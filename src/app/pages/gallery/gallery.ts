@@ -51,7 +51,7 @@ export class Gallery implements OnInit {
     inject(SeoService).set({
       title: 'Bathroom Design Gallery',
       description:
-        'Browse our curated gallery of stunning bathroom transformations on the Monterey Peninsula. Get inspired for your next shower remodel with New Bath Expo — real projects, real results.',
+        'Browse our curated gallery of stunning bathroom transformations on the Monterey Peninsula. Get inspired for your next shower remodel with New Bath Expo. Real projects, real results.',
       keywords:
         'bathroom design gallery, shower remodel photos, bathroom renovation monterey, before after bathroom remodel, New Bath Expo bathroom designs',
       canonical: '/gallery',

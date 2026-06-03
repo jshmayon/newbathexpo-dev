@@ -16,7 +16,7 @@ export class Products {
     inject(SeoService).set({
       title: 'Shower Products & Materials',
       description:
-        'Explore our full range of bathroom products — New Bath Expo shower wall panels, shower bases, accessories, and custom trim. Premium materials for your next remodel on the Monterey Peninsula.',
+        'Explore our full range of bathroom products: shower wall panels, shower bases, accessories, and custom trim. Premium materials for your next remodel on the Monterey Peninsula.',
       keywords:
         'New Bath Expo shower wall panels, shower base options, shower accessories, bathroom remodel products monterey, shower materials california',
       canonical: '/products',

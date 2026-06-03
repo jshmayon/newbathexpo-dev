@@ -3,56 +3,77 @@
 
   <url>
     <loc>https://www.newbathexpo.com/</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://www.newbathexpo.com/products</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://www.newbathexpo.com/products/shower-wall-systems</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://www.newbathexpo.com/products/shower-floors-and-bases</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://www.newbathexpo.com/products/shower-accessories</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
 
   <url>
     <loc>https://www.newbathexpo.com/products/colors-and-trim</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
+    <loc>https://www.newbathexpo.com/products/colors-and-trim/stone-colors</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <url>
+    <loc>https://www.newbathexpo.com/products/colors-and-trim/simtile</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <url>
+    <loc>https://www.newbathexpo.com/products/colors-and-trim/dimensions-simtile</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <url>
     <loc>https://www.newbathexpo.com/gallery</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://www.newbathexpo.com/bookings</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>

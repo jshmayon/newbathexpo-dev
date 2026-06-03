@@ -25,7 +25,7 @@ export const routes: Routes = [
   { path: 'products/colors-and-trim/stone-colors', component: StoneColors, title: 'Stone Colors | New Bath Expo' },
   { path: 'products/colors-and-trim/simtile', component: Simtile, title: 'SimTile | New Bath Expo' },
   { path: 'products/colors-and-trim/dimensions-simtile', component: DimensionsSimtile, title: 'Dimensions SimTile | New Bath Expo' },
-  { path: 'gallery', component: Gallery, title: 'Gallery Design | New Bath Expo' },
+  { path: 'gallery', component: Gallery, title: 'Bathroom Design Gallery | New Bath Expo' },
   { path: 'book-now', component: BookNow, title: 'Book Now | New Bath Expo' },
   { path: 'bookings', component: Bookings, title: 'Bookings | New Bath Expo' },
   { path: 'design-request', component: DesignRequest, title: 'Design Request | New Bath Expo' },
