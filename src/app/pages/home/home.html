@@ -45,7 +45,7 @@
     <div class="ps-grid">
       <div class="ps-card">
         <div class="ps-card-image">
-          <img src="assets/baths/1.jpg" alt="Shower Wall Systems" loading="lazy" />
+          <img src="assets/baths/1.jpg" alt="Shower Wall Systems" loading="lazy" width="800" height="600" />
           <div class="ps-card-overlay"></div>
         </div>
         <div class="ps-card-body">
@@ -57,7 +57,7 @@
 
       <div class="ps-card">
         <div class="ps-card-image">
-          <img src="assets/baths/8.jpg" alt="Shower Floors and Bases" loading="lazy" />
+          <img src="assets/baths/8.jpg" alt="Shower Floors and Bases" loading="lazy" width="800" height="600" />
           <div class="ps-card-overlay"></div>
         </div>
         <div class="ps-card-body">
@@ -69,7 +69,7 @@
 
       <div class="ps-card">
         <div class="ps-card-image">
-          <img src="assets/baths/10.jpg" alt="Shower Accessories" loading="lazy" />
+          <img src="assets/baths/10.jpg" alt="Shower Accessories" loading="lazy" width="800" height="600" />
           <div class="ps-card-overlay"></div>
         </div>
         <div class="ps-card-body">
@@ -89,7 +89,7 @@
       <div class="ps-colors-grid">
         <div class="ps-color-card">
           <div class="ps-color-image">
-            <img src="assets/stone_colors/8_calacatta-white.png" alt="Stone Colors" loading="lazy" />
+            <img src="assets/stone_colors/8_calacatta-white.png" alt="Stone Colors" loading="lazy" width="600" height="600" />
           </div>
           <div class="ps-color-body">
             <h4>Stone Colors</h4>
@@ -100,7 +100,7 @@
 
         <div class="ps-color-card">
           <div class="ps-color-image">
-            <img src="assets/simtile/5_calacatta_whitee_10x20_simtile.jpg" alt="SimTile" loading="lazy" />
+            <img src="assets/simtile/5_calacatta_whitee_10x20_simtile.jpg" alt="SimTile" loading="lazy" width="600" height="600" />
           </div>
           <div class="ps-color-body">
             <h4>SimTile</h4>
@@ -111,7 +111,7 @@
 
         <div class="ps-color-card">
           <div class="ps-color-image">
-            <img src="assets/dimension-simtile/10x20_Gray-1030x1030.jpg" alt="Dimensions SimTile" loading="lazy" />
+            <img src="assets/dimension-simtile/10x20_Gray-1030x1030.jpg" alt="Dimensions SimTile" loading="lazy" width="600" height="600" />
           </div>
           <div class="ps-color-body">
             <h4>Dimensions SimTile</h4>
@@ -167,7 +167,7 @@
     </div>
 
     <div class="trusted-image">
-      <img src="assets/baths/15.jpg" alt="A beautifully remodeled bathroom by New Bath Expo" loading="lazy" />
+      <img src="assets/baths/15.jpg" alt="A beautifully remodeled bathroom by New Bath Expo" loading="lazy" width="800" height="800" />
     </div>
   </div>
 </section>
@@ -189,10 +189,10 @@
     </div>
 
     <div class="markets-body">
-      <ul class="market-list" role="list">
+      <ul class="market-list">
         @for (market of markets; track market.title; let i = $index) {
         <li class="market-item" [class.active]="selectedMarket() === i" (click)="selectedMarket.set(i)"
-          [attr.aria-selected]="selectedMarket() === i" role="button" tabindex="0"
+          [attr.aria-pressed]="selectedMarket() === i" role="button" tabindex="0"
           (keydown.enter)="selectedMarket.set(i)" (keydown.space)="selectedMarket.set(i)">
           <div class="market-item-header">
             <span class="market-index">0{{ i + 1 }}</span>
@@ -213,7 +213,7 @@
 
       <div class="market-image-panel">
         <img [src]="markets[selectedMarket()].image"
-          [alt]="markets[selectedMarket()].title + ' bathroom project by New Bath Expo'" loading="lazy" />
+          [alt]="markets[selectedMarket()].title + ' bathroom project by New Bath Expo'" loading="lazy" width="800" height="600" />
       </div>
     </div>
   </div>

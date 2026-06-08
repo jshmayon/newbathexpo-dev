@@ -9,6 +9,8 @@
 <section class="gallery-section" (keydown)="onKeydown($event)" tabindex="0">
   <div class="gallery-inner">
 
+    <h2 class="visually-hidden">Browse Gallery</h2>
+
     <!-- Preference Filters -->
     <div class="gallery-filters">
       <div class="filter-group">
@@ -53,6 +55,8 @@
           class="gallery-item"
           [class.loaded]="loaded()[i]"
           (click)="openLightbox(i)"
+          (keydown.enter)="openLightbox(i)"
+          (keydown.space)="$event.preventDefault(); openLightbox(i)"
           role="button"
           tabindex="0"
           [attr.aria-label]="'View ' + img.alt"

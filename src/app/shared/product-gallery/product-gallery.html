@@ -2,7 +2,7 @@
   @for (item of items(); track item.imageUrl; let i = $index) {
   <div class="pg-card" (click)="openLightbox(i)">
     <div class="pg-image-box">
-      <img [src]="item.imageUrl" [alt]="item.label" loading="lazy" />
+      <img [src]="item.imageUrl" [alt]="item.label" loading="lazy" width="600" height="450" />
     </div>
     <p class="pg-label">{{ item.label }}</p>
   </div>

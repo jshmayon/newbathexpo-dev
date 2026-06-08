@@ -42,7 +42,7 @@ export class Home implements OnInit, OnDestroy {
     {
       title: 'Multi-Family',
       description: 'Scalable, consistent solutions for apartment complexes and condominiums, built for volume without sacrificing quality.',
-      image: 'assets/baths/3.jpg',
+      image: 'assets/baths/5.jpg',
     },
     {
       title: 'Hospitality',
