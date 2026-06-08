@@ -1,0 +1,222 @@
+<form class="lead-sheet-form" (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+  <!-- Branded Header (internal/staff only) -->
+  @if (!publicMode) {
+  <div class="form-brand-header">
+    <div class="brand-top">
+      <img src="assets/logo-text.png" alt="New Bath Expo" class="brand-logo" width="160" height="32" />
+      <span class="brand-tagline">Free In-Home Consultation &nbsp;|&nbsp; Bathroom Remodels &amp; Updates</span>
+    </div>
+    <div class="brand-contact">
+      <a href="tel:{{ pleasantonPhone }}" class="brand-contact-item">
+        <span class="brand-location">Pleasanton</span>
+        <span>{{ pleasantonPhone }}</span>
+      </a>
+      <span class="brand-sep" aria-hidden="true"></span>
+      <a href="tel:+18312934883" class="brand-contact-item">
+        <span class="brand-location">Pacific Grove</span>
+        <span>831-293-4883</span>
+      </a>
+      <span class="brand-sep" aria-hidden="true"></span>
+      <a href="mailto:info@newbathexpo.com" class="brand-contact-item">
+        <span class="brand-location">Email</span>
+        <span>info&#64;newbathexpo.com</span>
+      </a>
+    </div>
+  </div>
+  }
+
+  @if (publicMode) {
+  <div class="form-public-header">
+    <h1 class="form-public-title">Request a Free In-Home Consultation</h1>
+    <p class="form-public-sub">Fill out the form below and our team will be in touch within 1 business day.</p>
+  </div>
+  }
+
+  <div class="form-body">
+
+    <!-- Section 1: Customer Contact -->
+    <div class="form-section">
+      <p class="section-label">Customer Contact Information</p>
+
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input id="fullName" type="text" placeholder="Jane Smith"
+          [(ngModel)]="form.fullName" name="fullName" required />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input id="phone" type="tel" placeholder="(555) 000-0000"
+            [(ngModel)]="form.phone" name="phone" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input id="email" type="email" placeholder="jane@example.com"
+            [(ngModel)]="form.email" name="email" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Street Address</label>
+        <input id="address" type="text" placeholder="123 Main St"
+          [(ngModel)]="form.address" name="address" required />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="city">City</label>
+          <input id="city" type="text" placeholder="Pacific Grove"
+            [(ngModel)]="form.city" name="city" required />
+        </div>
+        <div class="form-group">
+          <label for="zip">Zip Code</label>
+          <input id="zip" type="text" placeholder="93950" inputmode="numeric"
+            [(ngModel)]="form.zip" name="zip" required />
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Project Details -->
+    <div class="form-section">
+      <p class="section-label">Project Details &amp; Scope</p>
+
+      <div class="form-group">
+        <label class="group-label">Possible work wanted <span class="label-note">(select all that apply)</span></label>
+        <div class="checkbox-grid">
+          <label class="checkbox-item">
+            <input type="checkbox" [(ngModel)]="form.work.fullRemodel" name="fullRemodel" />
+            <span>Full Remodel</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" [(ngModel)]="form.work.partialRemodel" name="partialRemodel" />
+            <span>Partial Remodel</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" [(ngModel)]="form.work.tubToShower" name="tubToShower" />
+            <span>Tub-to-Shower Conversion</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" [(ngModel)]="form.work.vanity" name="vanity" />
+            <span>Vanity, Vanity-Top</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" [(ngModel)]="form.work.walkInTub" name="walkInTub" />
+            <span>Walk-in Tub, Free-Standing Tub</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" [(ngModel)]="form.work.newFloorToilet" name="newFloorToilet" />
+            <span>New Floor, Toilet</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" [(ngModel)]="form.work.bidetSeatPaint" name="bidetSeatPaint" />
+            <span>Bidet-Seat, New Paint</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" [(ngModel)]="form.work.expandBathroom" name="expandBathroom" />
+            <span>Expand Bathroom</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" [(ngModel)]="form.work.grabBars" name="grabBars" />
+            <span>Grab Bars</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="estimatorNotes">Anything your estimator should know?</label>
+        <textarea id="estimatorNotes" rows="4"
+          placeholder="Special considerations, accessibility needs, budget range, existing issues..."
+          [(ngModel)]="form.estimatorNotes" name="estimatorNotes"></textarea>
+      </div>
+    </div>
+
+    <!-- Section 3: Qualification -->
+    <div class="form-section">
+      <p class="section-label">Qualification Questions</p>
+
+      <div class="form-group">
+        <label for="yearsOwned">How long have you owned your home?</label>
+        <input id="yearsOwned" type="text" placeholder="e.g. 5 years"
+          [(ngModel)]="form.yearsOwned" name="yearsOwned" required />
+      </div>
+
+      <div class="form-group">
+        <label class="group-label">When would you like to remodel?</label>
+        <div class="radio-group" role="radiogroup" aria-label="Remodel timeline">
+          <label class="radio-item">
+            <input type="radio" [(ngModel)]="form.remodelTimeline" name="remodelTimeline" value="1-month" required />
+            <span>1 Month</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" [(ngModel)]="form.remodelTimeline" name="remodelTimeline" value="3-months" required />
+            <span>3 Months</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" [(ngModel)]="form.remodelTimeline" name="remodelTimeline" value="1-year" required />
+            <span>1 Year</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="estimatesReceived">How many estimates have you received?</label>
+        <input id="estimatesReceived" type="number" min="0" max="20" placeholder="0"
+          [(ngModel)]="form.estimatesReceived" name="estimatesReceived" required />
+      </div>
+    </div>
+
+    <!-- Section 4: Preferred Schedule -->
+    @if (!publicMode) {
+    <div class="office-section">
+      <p class="office-badge">Preferred Schedule</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="internalDate">Today's Date</label>
+          <input id="internalDate" type="date" [(ngModel)]="form.internalDate" name="internalDate" />
+        </div>
+        <div class="form-group">
+          <label for="setBy">Set By</label>
+          <input id="setBy" type="text" placeholder="Rep name"
+            [(ngModel)]="form.setBy" name="setBy" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="estimateDate">Estimate Date</label>
+          <input id="estimateDate" type="date" [(ngModel)]="form.estimateDate" name="estimateDate" />
+        </div>
+        <div class="form-group">
+          <label for="day">Day</label>
+          <input id="day" type="text" placeholder="e.g. Monday"
+            [(ngModel)]="form.day" name="day" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="timeSet">Time Set</label>
+          <input id="timeSet" type="time" [(ngModel)]="form.timeSet" name="timeSet" />
+        </div>
+        <div class="form-group"></div>
+      </div>
+    </div>
+    }
+
+    <!-- Status + Submit -->
+    @if (status === 'success') {
+      <p class="form-msg success">Lead submitted successfully! The form has been reset.</p>
+    }
+    @if (status === 'error') {
+      <p class="form-msg error">Something went wrong. Please try again or call us directly.</p>
+    }
+
+    <button type="submit" class="submit-btn" [disabled]="status === 'loading' || f.invalid">
+      {{ status === 'loading' ? 'Submitting...' : 'Submit Lead Sheet' }}
+    </button>
+
+  </div>
+</form>

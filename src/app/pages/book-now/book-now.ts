@@ -1,12 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { BookingForm } from '../../shared/booking-form/booking-form';
 import { DesignRequestForm } from '../../shared/design-request-form/design-request-form';
+import { LeadSheetForm } from '../../shared/lead-sheet-form/lead-sheet-form';
 import { PageHero } from '../../shared/page-hero/page-hero';
 import { SeoService } from '../../service/seo.service';
 
 @Component({
   selector: 'app-book-now',
-  imports: [BookingForm, DesignRequestForm, PageHero],
+  imports: [BookingForm, DesignRequestForm, LeadSheetForm, PageHero],
   templateUrl: './book-now.html',
   styleUrl: './book-now.scss',
 })

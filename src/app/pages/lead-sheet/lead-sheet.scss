@@ -1,0 +1,32 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+  background: var(--color-bg);
+}
+
+.lead-sheet-page {
+  display: flex;
+  justify-content: center;
+  padding: 5rem 1.5rem 5rem;
+}
+
+.lead-sheet-card {
+  width: 100%;
+  max-width: 840px;
+  background: var(--color-surface);
+  border-radius: 16px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .lead-sheet-page {
+    padding: 3rem 0 3rem;
+  }
+
+  .lead-sheet-card {
+    border-radius: 0;
+    box-shadow: none;
+    border-top: 1px solid var(--color-border);
+  }
+}

@@ -1,0 +1,32 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+  background: var(--color-bg);
+}
+
+.contact-page {
+  display: flex;
+  justify-content: center;
+  padding: 5rem 1.5rem 5rem;
+}
+
+.contact-card {
+  width: 100%;
+  max-width: 840px;
+  background: var(--color-surface);
+  border-radius: 16px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .contact-page {
+    padding: 3rem 0 3rem;
+  }
+
+  .contact-card {
+    border-radius: 0;
+    box-shadow: none;
+    border-top: 1px solid var(--color-border);
+  }
+}

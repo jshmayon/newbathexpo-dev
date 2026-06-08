@@ -1,7 +1,8 @@
 User-agent: *
 Allow: /
 
-# Kiosk-only page — not a public content page
+# Internal-only pages
 Disallow: /showroom
+Disallow: /lead-sheet
 
 Sitemap: https://www.newbathexpo.com/sitemap.xml

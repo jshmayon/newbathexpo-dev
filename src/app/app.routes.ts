@@ -14,6 +14,8 @@ import { Showroom } from './pages/showroom/showroom';
 import { DesignRequest } from './pages/design-request/design-request';
 import { BookNow } from './pages/book-now/book-now';
 import { NotFound } from './pages/not-found/not-found';
+import { LeadSheet } from './pages/lead-sheet/lead-sheet';
+import { Contact } from './pages/contact/contact';
 
 export const routes: Routes = [
   { path: '', component: Home, title: 'New Bath Expo' },
@@ -30,5 +32,7 @@ export const routes: Routes = [
   { path: 'bookings', component: Bookings, title: 'Bookings | New Bath Expo' },
   { path: 'design-request', component: DesignRequest, title: 'Design Request | New Bath Expo' },
   { path: 'showroom', component: Showroom, title: 'Showroom Kiosk | New Bath Expo' },
+  { path: 'lead-sheet', component: LeadSheet, title: 'Lead Sheet | New Bath Expo' },
+  { path: 'contact', component: Contact, title: 'Contact Us | New Bath Expo' },
   { path: '**', component: NotFound, title: '404 | New Bath Expo' },
 ];
