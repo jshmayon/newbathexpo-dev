@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LeadSheetForm {
   @Input() publicMode = false;
-  readonly pleasantonPhone = '[INSERT_925_PHONE_NUMBER_HERE]';
+  readonly pleasantonPhone = '';
 
   form = {
     fullName: '',
